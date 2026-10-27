@@ -18,6 +18,9 @@
     "ville": "Saumur",
     "zoneIntervention": "Saumur, Gennes-Val-de-Loire, Doué-en-Anjou, Montreuil-Bellay et Longué-Jumelles"
   },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
   "engagements": [
     "Intervention d'urgence 7j/7",
     "Devis clair et 100 % gratuit",
@@ -27,7 +30,7 @@
   "services": [
     {
       "titre": "Dépannage d'urgence",
-      "description": "Recherche et réparation de fuite d'eau, dégorgement de canalisation et déblocage de chauffe-eau.",
+      "description": "Recherche et réparation de fuite d'eau, dégorgement de canalisation et déblocage de chau-eau.",
       "tarif": "À partir de 89 € TTC"
     },
     {
