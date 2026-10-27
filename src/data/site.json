@@ -2,18 +2,13 @@
   "identite": {
     "nomCommercial": "Atelier Durand Plomberie",
     "raisonSociale": "Durand SASU",
+    "directeurPublication": "Jean Durand",
     "metier": "Plombier chauffagiste",
     "tagline": "Dépannage d'urgence sous 2h & rénovation complète de salle de bain",
     "description": "Artisan plombier qualifié intervenant à Saumur et dans un rayon de 30 km pour vos dépannages sanitaires, chauffe-eau et projets de rénovation.",
     "siret": "891 234 567 00012",
     "assuranceDecennale": "Contrat Pro BTP n° DEC-987654321",
     "mediateur": "Médiateur du Commerce Coopératif et Associé (MCCA), 77 rue de Lourmel, 75015 Paris"
-    "identite": {
-    "nomCommercial": "Atelier Durand Plomberie",
-    "raisonSociale": "Durand SASU",
-    "directeurPublication": "Jean Durand",
-    "metier": "Plombier chauffagiste",
-    // ... reste du code inchangé ...
   },
   "contact": {
     "telephone": "02 41 00 00 00",
@@ -36,7 +31,7 @@
   "services": [
     {
       "titre": "Dépannage d'urgence",
-      "description": "Recherche et réparation de fuite d'eau, dégorgement de canalisation et déblocage de chau-eau.",
+      "description": "Recherche et réparation de fuite d'eau, dégorgement de canalisation et déblocage de chauffe-eau.",
       "tarif": "À partir de 89 € TTC"
     },
     {
