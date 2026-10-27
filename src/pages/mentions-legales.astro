@@ -1,0 +1,57 @@
+---
+// Chemin : src/pages/mentions-legales.astro
+import site from '../data/site.json';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentions Légales — {site.identite.nomCommercial}</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      body { font-family: system-ui, sans-serif; background: #f8fafc; color: #334155; line-height: 1.6; padding: 2rem 1rem; max-width: 800px; margin: 0 auto; }
+      h1 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+      h2 { color: #ea580c; margin-top: 2rem; font-size: 1.25rem; }
+      .carte { background: #ffffff; padding: 2rem; border-radius: 8px; border: 1px solid #e2e8f0; }
+      a { color: #ea580c; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .retour { display: inline-block; margin-bottom: 2rem; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <a href="/" class="retour">← Retour à l'accueil</a>
+    
+    <main class="carte">
+      <h1>Mentions Légales</h1>
+      
+      <h2>1. Éditeur du site</h2>
+      <p>
+        <strong>Raison sociale :</strong> {site.identite.raisonSociale}<br />
+        <strong>Siège social :</strong> {site.contact.adresse}, {site.contact.codePostal} {site.contact.ville}<br />
+        <strong>SIRET :</strong> {site.identite.siret}<br />
+        <strong>Directeur de la publication :</strong> {site.identite.directeurPublication || site.identite.nomCommercial}<br />
+        <strong>Contact :</strong> <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> - {site.contact.telephone}
+      </p>
+
+      <h2>2. Hébergement</h2>
+      <p>
+        Ce site est hébergé par <strong>Cloudflare, Inc.</strong><br />
+        Siège social : 101 Townsend St, San Francisco, CA 94107, États-Unis.<br />
+        Les données sont hébergées sur le réseau mondial de Cloudflare Pages, garantissant la sécurité et la rapidité d'accès.
+      </p>
+
+      <h2>3. Propriété intellectuelle</h2>
+      <p>
+        L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés (textes, photographies, éléments graphiques). La reproduction de tout ou partie de ce site est formellement interdite sauf autorisation expresse du directeur de la publication.
+      </p>
+
+      <h2>4. Médiation de la consommation</h2>
+      <p>
+        Conformément aux dispositions du Code de la consommation, le client a le droit de recourir gratuitement au service de médiation proposé par l'artisan. Le médiateur de la consommation proposé est :<br />
+        <strong>{site.identite.mediateur}</strong>
+      </p>
+    </main>
+  </body>
+</html>
