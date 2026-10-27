@@ -1,13 +1,62 @@
 {
-  "nomCommercial": "Atelier Durand Plomberie",
-  "metier": "Plombier chauffagiste",
-  "ville": "Angers",
-  "telephone": "02 41 00 00 00",
-  "telephoneLien": "+33241000000",
-  "accroche": "Dépannage d'urgence sous 2h et rénovation de salle de bain.",
-  "pointsForts": [
-    "Intervention 7j/7",
-    "Garantie décennale",
-    "Devis 100 % gratuit"
+  "identite": {
+    "nomCommercial": "Atelier Durand Plomberie",
+    "raisonSociale": "Durand SASU",
+    "metier": "Plombier chauffagiste",
+    "tagline": "Dépannage d'urgence sous 2h & rénovation complète de salle de bain",
+    "description": "Artisan plombier qualifié intervenant à Saumur et dans un rayon de 30 km pour vos dépannages sanitaires, chauffe-eau et projets de rénovation.",
+    "siret": "891 234 567 00012",
+    "assuranceDecennale": "Contrat Pro BTP n° DEC-987654321",
+    "mediateur": "Médiateur du Commerce Coopératif et Associé (MCCA), 77 rue de Lourmel, 75015 Paris"
+  },
+  "contact": {
+    "telephone": "02 41 00 00 00",
+    "telephoneLien": "+33241000000",
+    "email": "contact@atelier-durand-plomberie.fr",
+    "adresse": "12 rue d'Orléans",
+    "codePostal": "49400",
+    "ville": "Saumur",
+    "zoneIntervention": "Saumur, Gennes-Val-de-Loire, Doué-en-Anjou, Montreuil-Bellay et Longué-Jumelles"
+  },
+  "engagements": [
+    "Intervention d'urgence 7j/7",
+    "Devis clair et 100 % gratuit",
+    "Garantie décennale & RC Pro",
+    "Matériel certifié NF"
+  ],
+  "services": [
+    {
+      "titre": "Dépannage d'urgence",
+      "description": "Recherche et réparation de fuite d'eau, dégorgement de canalisation et déblocage de chauffe-eau.",
+      "tarif": "À partir de 89 € TTC"
+    },
+    {
+      "titre": "Chauffe-eau & Chauffage",
+      "description": "Installation, détartrage et remplacement de cumulus thermodynamiques et chaudières gaz.",
+      "tarif": "À partir de 650 € TTC posé"
+    },
+    {
+      "titre": "Rénovation de salle de bain",
+      "description": "Aménagement sur mesure : remplacement de baignoire par douche à l'italienne, pose de faïence et robinetterie.",
+      "tarif": "Sur devis gratuit"
+    }
+  ],
+  "faq": [
+    {
+      "question": "En combien de temps intervenez-vous à Saumur ?",
+      "reponse": "Pour les urgences (fuite majeure, coupure d'eau totale), nous nous déplaçons sous 2 heures sur Saumur et son agglomération proche."
+    },
+    {
+      "question": "Le devis est-il payant ?",
+      "reponse": "Non, l'établissement du devis est totalement gratuit et sans engagement avant tout démarrage de chantier."
+    },
+    {
+      "question": "Vos travaux sont-ils couverts par une assurance ?",
+      "reponse": "Oui, toutes nos installations de plomberie et rénovations bénéficient d'une garantie décennale nominative chez Pro BTP."
+    },
+    {
+      "question": "Quels modes de règlement acceptez-vous ?",
+      "reponse": "Nous acceptons les cartes bancaires, les virements instantanés et les chèques."
+    }
   ]
 }
