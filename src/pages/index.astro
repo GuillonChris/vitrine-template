@@ -1,0 +1,64 @@
+---
+import donnees from '../data/site.json';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{donnees.nomCommercial} — {donnees.metier} à {donnees.ville}</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background-color: #f8fafc;
+        color: #1f2937;
+        max-width: 680px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+      }
+      .carte {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 2rem;
+      }
+      .badge {
+        font-weight: 600;
+        color: #0369a1;
+      }
+      h1 {
+        color: #1e3a8a;
+        margin: 0.5rem 0 1rem 0;
+      }
+      .btn {
+        display: inline-block;
+        background: #f97316;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carte">
+      <span class="badge">{donnees.metier} à {donnees.ville}</span>
+      <h1>{donnees.nomCommercial}</h1>
+      <p>{donnees.accroche}</p>
+      
+      <a href={`tel:${donnees.telephoneLien}`} class="btn">
+        Appeler au {donnees.telephone}
+      </a>
+
+      <h3>Engagements :</h3>
+      <ul>
+        {donnees.pointsForts.map((point) => (
+          <li>✓ {point}</li>
+        ))}
+      </ul>
+    </div>
+  </body>
+</html>
