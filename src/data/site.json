@@ -8,6 +8,12 @@
     "siret": "891 234 567 00012",
     "assuranceDecennale": "Contrat Pro BTP n° DEC-987654321",
     "mediateur": "Médiateur du Commerce Coopératif et Associé (MCCA), 77 rue de Lourmel, 75015 Paris"
+    "identite": {
+    "nomCommercial": "Atelier Durand Plomberie",
+    "raisonSociale": "Durand SASU",
+    "directeurPublication": "Jean Durand",
+    "metier": "Plombier chauffagiste",
+    // ... reste du code inchangé ...
   },
   "contact": {
     "telephone": "02 41 00 00 00",
