@@ -2,7 +2,8 @@
 // Chemin : src/pages/index.astro
 import site from '../data/site.json';
 
-// Schéma JSON-LD combiné (LocalBusiness + FAQPage) pour Google et les moteurs IA
+const gaId = site.analytics?.googleAnalyticsId || '';
+
 const schemaLocalBusiness = {
   "@context": "https://schema.org",
   "@graph": [
@@ -48,7 +49,7 @@ const schemaLocalBusiness = {
     <meta name="description" content={site.identite.description} />
     <meta name="robots" content="index, follow" />
 
-    <!-- Script Schema.org pour le SEO local et l'indexation IA -->
+    <!-- SEO Schema.org -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaLocalBusiness)} />
 
     <style>
@@ -115,7 +116,6 @@ const schemaLocalBusiness = {
         padding: 2rem 1rem;
       }
 
-      /* Hero Section */
       .hero {
         background: var(--bg-card);
         padding: 3rem 2rem;
@@ -167,7 +167,6 @@ const schemaLocalBusiness = {
         background: var(--accent-hover);
       }
 
-      /* Engagements */
       .engagements {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -185,7 +184,6 @@ const schemaLocalBusiness = {
         color: var(--text-dark);
       }
 
-      /* Services */
       h2 {
         font-size: 1.6rem;
         color: var(--text-dark);
@@ -227,7 +225,6 @@ const schemaLocalBusiness = {
         padding-top: 0.75rem;
       }
 
-      /* Zone d'intervention */
       .zone-box {
         background: #eff6ff;
         border: 1px solid #bfdbfe;
@@ -240,7 +237,6 @@ const schemaLocalBusiness = {
         color: #1e40af;
       }
 
-      /* FAQ */
       .faq-list {
         background: var(--bg-card);
         border: 1px solid var(--border);
@@ -302,13 +298,88 @@ const schemaLocalBusiness = {
         padding-top: 1.5rem;
         border-top: 1px solid #334155;
         font-size: 0.75rem;
+        line-height: 1.5;
+      }
+
+      .btn-gestion-cookies {
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        text-decoration: underline;
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 0.5rem;
+      }
+
+      .btn-gestion-cookies:hover {
+        color: #ffffff;
+      }
+
+      /* Bandeau Cookies RGPD */
+      #cookie-banner {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        right: 1.5rem;
+        max-width: 520px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        padding: 1.5rem;
+        z-index: 9999;
+        display: none;
+      }
+
+      #cookie-banner.visible {
+        display: block;
+      }
+
+      .cookie-title {
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .cookie-text {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 1rem;
         line-height: 1.4;
+      }
+
+      .cookie-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .btn-cookie {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid transparent;
+      }
+
+      .btn-cookie-accept {
+        background: var(--primary);
+        color: #ffffff;
+      }
+
+      .btn-cookie-refuse {
+        background: #f1f5f9;
+        color: var(--text-dark);
+        border-color: var(--border);
       }
     </style>
   </head>
   <body>
 
-    <!-- Barre d'en-tête fixe -->
     <header>
       <div class="header-content">
         <span class="logo-titre">{site.identite.nomCommercial}</span>
@@ -319,7 +390,6 @@ const schemaLocalBusiness = {
     </header>
 
     <main>
-      <!-- Hero -->
       <section class="hero">
         <span class="badge">{site.identite.metier} à {site.contact.ville}</span>
         <h1>{site.identite.nomCommercial}</h1>
@@ -329,14 +399,12 @@ const schemaLocalBusiness = {
         </a>
       </section>
 
-      <!-- Engagements clés -->
       <section class="engagements">
         {site.engagements.map((item) => (
           <div class="engagement-item">✓ {item}</div>
         ))}
       </section>
 
-      <!-- Prestations et prix -->
       <section>
         <h2>Nos prestations et tarifs</h2>
         <div class="grid-services">
@@ -352,13 +420,11 @@ const schemaLocalBusiness = {
         </div>
       </section>
 
-      <!-- Zone d'intervention -->
       <section class="zone-box">
         <strong>Zone d'intervention rapide :</strong>
         <p>Nous intervenons dans les localités suivantes : {site.contact.zoneIntervention}.</p>
       </section>
 
-      <!-- FAQ structurée -->
       <section>
         <h2>Questions fréquentes</h2>
         <div class="faq-list">
@@ -372,7 +438,6 @@ const schemaLocalBusiness = {
       </section>
     </main>
 
-    <!-- Pied de page conforme RGPD et droit français -->
     <footer>
       <div class="footer-content">
         <div>
@@ -394,10 +459,74 @@ const schemaLocalBusiness = {
 
       <div class="mentions-legales">
         <p>
-          <strong>Mentions légales & Conformité :</strong> {site.identite.raisonSociale} — SIRET : {site.identite.siret} — Hébergement : Cloudflare Pages (San Francisco, USA). Site statique sans dépôt de cookies traceurs ni collecte de données personnelles superflue (exempté de bandeau cookies CNIL).
+          <strong>Mentions légales & Confidentialité :</strong> {site.identite.raisonSociale} — SIRET : {site.identite.siret} — Hébergement : Cloudflare Pages (San Francisco, USA). Mesure d'audience soumise à consentement préalable via Google Analytics.
         </p>
+        <button id="btn-reopen-cookies" class="btn-gestion-cookies" type="button">
+          ⚙️ Gestion des préférences de cookies
+        </button>
       </div>
     </footer>
+
+    <!-- Bandeau Cookies RGPD -->
+    <div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+      <div id="cookie-title" class="cookie-title">Mesure d'audience & vie privée</div>
+      <p class="cookie-text">
+        Ce site utilise des traceurs de mesure d'audience (Google Analytics 4) pour analyser son trafic et améliorer l'expérience utilisateur. Aucun traceur publicitaire n'est déposé sans votre consentement.
+      </p>
+      <div class="cookie-actions">
+        <button id="cookie-refuse" class="btn-cookie btn-cookie-refuse" type="button">Refuser tout</button>
+        <button id="cookie-accept" class="btn-cookie btn-cookie-accept" type="button">Accepter tout</button>
+      </div>
+    </div>
+
+    <!-- Script de gestion du consentement et chargement conditionnel GA4 -->
+    <script define:vars={{ gaId }}>
+      const STORAGE_KEY = 'site_cookie_consent';
+      const banner = document.getElementById('cookie-banner');
+      const btnAccept = document.getElementById('cookie-accept');
+      const btnRefuse = document.getElementById('cookie-refuse');
+      const btnReopen = document.getElementById('btn-reopen-cookies');
+
+      function loadGoogleAnalytics(id) {
+        if (!id || id === 'G-XXXXXXXXXX') return;
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', id, { anonymize_ip: true });
+      }
+
+      function applyConsent(status) {
+        localStorage.setItem(STORAGE_KEY, status);
+        banner.classList.remove('visible');
+
+        if (status === 'granted') {
+          loadGoogleAnalytics(gaId);
+        }
+      }
+
+      // Vérification du consentement au chargement
+      const currentConsent = localStorage.getItem(STORAGE_KEY);
+      if (currentConsent === 'granted') {
+        loadGoogleAnalytics(gaId);
+      } else if (!currentConsent) {
+        banner.classList.add('visible');
+      }
+
+      // Écouteurs d'événements
+      btnAccept.addEventListener('click', () => applyConsent('granted'));
+      btnRefuse.addEventListener('click', () => applyConsent('denied'));
+      btnReopen.addEventListener('click', () => {
+        banner.classList.add('visible');
+      });
+    </script>
 
   </body>
 </html>
