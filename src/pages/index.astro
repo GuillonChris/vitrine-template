@@ -437,8 +437,7 @@ const schemaLocalBusiness = {
         </div>
       </section>
     </main>
-
-    <footer>
+<footer>
       <div class="footer-content">
         <div>
           <h4>{site.identite.nomCommercial}</h4>
@@ -459,7 +458,9 @@ const schemaLocalBusiness = {
 
       <div class="mentions-legales">
         <p>
-          <strong>Mentions légales & Confidentialité :</strong> {site.identite.raisonSociale} — SIRET : {site.identite.siret} — Hébergement : Cloudflare Pages (San Francisco, USA). Mesure d'audience soumise à consentement préalable via Google Analytics.
+          <strong>{site.identite.raisonSociale}</strong> — SIRET : {site.identite.siret} — Hébergement : Cloudflare Pages.<br />
+          <a href="/mentions-legales/">Mentions légales</a> &bull; 
+          <a href="/politique-confidentialite/">Politique de confidentialité</a>
         </p>
         <button id="btn-reopen-cookies" class="btn-gestion-cookies" type="button">
           ⚙️ Gestion des préférences de cookies
