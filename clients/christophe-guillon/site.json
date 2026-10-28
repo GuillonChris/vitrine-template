@@ -1,0 +1,107 @@
+{
+  "identite": {
+    "nomCommercial": "Christophe GUILLON CONSEILS",
+    "raisonSociale": "CGC",
+    "statutJuridique": "Micro-entreprise",
+    "capitalSocial": "N/A",
+    "directeurPublication": "Christophe GUILLON",
+    "secteur": "Prestation de services aux entreprises (B2B)",
+    "metier": "Consultant en stratégie digital et IA",
+    "tagline": "Sécurisez et accélérez la croissance de votre entreprise à Saumur grâce à une stratégie digitale pragmatique et l'intégration concrète de l'IA.",
+    "description": "Fort de plus de 20 ans d'expérience auprès des dirigeants de TPE et PME, Christophe Guillon Conseils délivre un accompagnement sur mesure en stratégie digitale et intelligence artificielle. Basé à Saumur et intervenant dans tout le Maine-et-Loire ainsi qu'à distance, le cabinet allie conseil stratégique et formation terrain pour optimiser vos processus, automatiser les tâches chronophages et maximiser votre rentabilité commerciale.",
+    "siret": "47812134600090",
+    "rcs": "Angers",
+    "tva": "Franchise en base de TVA (art. 293 B du CGI)",
+    "assurancePro": "",
+    "mediateur": ""
+  },
+  "contact": {
+    "telephone": "06 75 05 23 75",
+    "telephoneLien": "+33675052375",
+    "email": "contact@Christophe-guillon.com",
+    "adresse": "18 rue du Pressoir",
+    "codePostal": "49400",
+    "ville": "Saumur",
+    "zoneIntervention": "Maine-et-Loire, distanciel",
+    "horaires": "Lun-Ven : de 9h à 18h30"
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
+  "seo": {
+    "motsCles": [
+      "consultant stratégie digitale Saumur",
+      "formation intelligence artificielle Saumur",
+      "conseil IA TPE PME Maine-et-Loire",
+      "automatisation processus B2B Angers",
+      "performance commerciale Saumur",
+      "transformation numérique Maine-et-Loire"
+    ],
+    "metaTitle": "Christophe Guillon Conseils | Consultant Digital & IA Saumur",
+    "metaDescription": "Consultant en stratégie digitale et IA à Saumur : automatisez vos tâches et accélérez vos ventes. Contactez-moi pour bâtir votre plan d'action sur mesure !"
+  },
+  "medias": {
+    "logo": {
+      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793185191/sites/christophe-guillon-conseils/christophe-guillon-conseils-logo-1793185191250.webp",
+      "alt": "Logo Christophe Guillon Conseils"
+    },
+    "photos": [
+      {
+        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793185191/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-1-1793185192045.webp",
+        "titre": "Christophe Guillon",
+        "description": "Consultant en stratégie digitale"
+      },
+      {
+        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793185192/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-2-1793185192523.webp",
+        "titre": "Formation IA",
+        "description": "Formation IA avec BGE Pays de la Loire"
+      }
+    ]
+  },
+  "engagements": [
+    "Plus de 20 ans d'expérience terrain au service exclusif des dirigeants de TPE et PME.",
+    "Une méthode strictement pragmatique sans jargon théorique, axée sur le ROI et l'efficacité opérationnelle.",
+    "Une flexibilité totale : pilotage clé en main de vos projets ou transfert de compétences pour une autonomie à 100 %.",
+    "Un ancrage territorial fort à Saumur et en Maine-et-Loire combiné à une agilité d'intervention en distanciel."
+  ],
+  "services": [
+    {
+      "titre": "Intelligence Artificielle & Automatisation",
+      "description": "Identifiez et automatisez vos processus répétitifs pour libérer des heures précieuses chaque semaine tout en fiabilisant votre production opérationnelle.",
+      "tarif": "À partir de 750 € HT"
+    },
+    {
+      "titre": "Stratégie Digitale & Feuille de Route",
+      "description": "Bénéficiez d'un plan d'action structuré, pragmatique et immédiatement rentable pour piloter la croissance et la modernisation de votre entreprise.",
+      "tarif": "À partir de 1 200 € HT"
+    },
+    {
+      "titre": "Optimisation de la Performance Commerciale",
+      "description": "Fluidifiez votre tunnel de vente et déployez des outils de conversion modernes pour transformer durablement vos prospects en clients fidèles.",
+      "tarif": "À partir de 850 € HT"
+    },
+    {
+      "titre": "Formations Opérationnelles & Ateliers IA",
+      "description": "Formez vos collaborateurs sur le terrain aux usages concrets des outils numériques et de l'IA pour garantir une adoption rapide et autonome.",
+      "tarif": "À partir de 600 € HT / jour"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Combien de temps dure un accompagnement avec Christophe Guillon Conseils ?",
+      "reponse": "La durée s'adapte à la complexité de vos objectifs : d'une mission flash de cadrage de 2 à 3 jours pour structurer votre feuille de route, à un suivi opérationnel sur plusieurs semaines ou mois pour déployer vos outils et former vos équipes."
+    },
+    {
+      "question": "Combien coûte un accompagnement en stratégie digitale et IA ?",
+      "reponse": "Chaque intervention fait l'objet d'un devis préalable transparent adapté à vos priorités. Les prestations d'audit et de cadrage démarrent à partir de 750 € HT, avec une exigence constante de rentabilité mesurable pour votre entreprise."
+    },
+    {
+      "question": "Les formations en intelligence artificielle sont-elles finançables ?",
+      "reponse": "Dispensees en entreprise ou en partenariat avec des organismes comme BGE Pays de la Loire, nos formations professionnelles peuvent être prises en charge par votre OPCO au titre du plan de développement des compétences, bien qu'elles ne soient pas éligibles au CPF individuel."
+    },
+    {
+      "question": "Intervenez-vous uniquement à Saumur ou également à distance ?",
+      "reponse": "Implanté à Saumur, j'interviens sur site dans tout le département de Maine-et-Loire (Angers, Cholet, Saumur) pour vos sessions stratégiques et ateliers d'équipe, ainsi qu'en distanciel partout en France grâce à des outils collaboratifs interactifs."
+    }
+  ]
+}
