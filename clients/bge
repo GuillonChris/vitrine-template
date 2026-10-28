@@ -1,0 +1,46 @@
+{
+  "identite": {
+    "nomCommercial": "BGE Pays de la Loire",
+    "raisonSociale": "BGE",
+    "statutJuridique": "SARL / EURL",
+    "capitalSocial": "10000",
+    "directeurPublication": "John Doe",
+    "secteur": "Prestation de services aux entreprises (B2B)",
+    "metier": "Appui aux entrepeneurs",
+    "tagline": "Sécurisez et accélérez la réussite de votre entreprise à Trélazé avec un accompagnement stratégique sur mesure.",
+    "description": "Implantée à Trélazé, BGE Pays de la Loire accompagne les créateurs, repreneurs et dirigeants d'entreprise dans toutes les étapes de leur développement. Grâce à une méthodologie éprouvée et un ancrage territorial fort, nos experts sécurisent votre modèle économique, structurent votre financement et optimisent votre pilotage opérationnel pour garantir un retour sur investissement durable.",
+    "siret": "12345678900012",
+    "rcs": "Angers",
+    "tva": "Franchise en base de TVA (art. 293 B du CGI)",
+    "assurancePro": "",
+    "mediateur": ""
+  },
+  "contact": {
+    "telephone": "02 41 66 52 52",
+    "telephoneLien": "+33241665252",
+    "email": "contact@bge-paysdelaloire.com",
+    "adresse": "56 rue Albert Camus",
+    "codePostal": "49800",
+    "ville": "Trélazé",
+    "zoneIntervention": "Pays de la Loire",
+    "horaires": "Du lundi au vendredi de 8h30 à 12h30 et de 14h à 17h30"
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
+  "seo": {
+    "motsCles": [
+      "appui aux entrepreneurs Trélazé",
+      "création entreprise Angers",
+      "accompagnement dirigeant Pays de la Loire",
+      "business plan Trélazé",
+      "financement entreprise Maine-et-Loire",
+      "formation gestion entreprise 49"
+    ],
+    "metaTitle": "Appui aux Entrepreneurs à Trélazé | BGE Pays de la Loire",
+    "metaDescription": "Expert en appui aux entrepreneurs à Trélazé, BGE Pays de la Loire sécurise votre business plan et vos financements. Prenez rendez-vous avec nos conseillers !"
+  },
+  "medias": {
+    "logo": {
+      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793190525/sites/bge-pays-de-la-loire/bge-pays-de-la-loire-logo-1793190525586.webp",
+      "alt": "Logo BGE Pays de la Loire"
