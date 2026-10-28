@@ -1,19 +1,19 @@
 {
   "design": {
-    "layout": "corporate-b2b",
-    "palette": "indigo-cyan",
+    "layout": "artisan-btp",
+    "palette": "vert-sauge-sable",
     "typo": "moderne"
   },
   "identite": {
-    "nomCommercial": "Christophe GUILLON CONSEILS",
-    "raisonSociale": "CGC",
+    "nomCommercial": "TESTS",
+    "raisonSociale": "TEST",
     "statutJuridique": "Micro-entreprise",
     "capitalSocial": "N/A",
     "directeurPublication": "Christophe GUILLON",
     "secteur": "Prestation de services aux entreprises (B2B)",
     "metier": "Consultant en stratégie digital et IA",
-    "tagline": "Votre consultant en stratégie digitale et IA à Saumur, pour transformer vos enjeux en résultats mesurables.",
-    "description": "Consultant en stratégie digitale et IA à Saumur, j’accompagne les entreprises du Maine-et-Loire avec une méthode claire, des livrables actionnables et un ROI mesurable. Contactez-moi.",
+    "tagline": "Consultant en stratégie digitale et IA à Saumur : des solutions claires, mesurables et rentables pour votre entreprise.",
+    "description": "Consultant en stratégie digitale et IA à Saumur, j’accompagne les entreprises du Maine-et-Loire dans la définition et l’exécution de projets digitaux performants. Diagnostic, feuille de route, automatisation et pilotage par les résultats.",
     "siret": "12345678900012",
     "rcs": "Angers",
     "tva": "Franchise en base de TVA (art. 293 B du CGI)",
@@ -38,74 +38,74 @@
       "consultant stratégie digitale Saumur",
       "consultant IA Maine-et-Loire",
       "accompagnement transformation digitale entreprise",
-      "audit IA entreprise Saumur",
-      "conseil digital B2B Saumur"
+      "automatisation IA pour PME",
+      "audit digital et intelligence artificielle Saumur"
     ],
-    "metaTitle": "Consultant Stratégie Digitale & IA à Saumur | Christophe Guillon Conseils",
-    "metaDescription": "Consultant en stratégie digitale et IA à Saumur : audit, feuille de route et accompagnement B2B pour un ROI mesurable. Contactez Christophe Guillon Conseils."
+    "metaTitle": "Consultant Stratégie Digitale & IA à Saumur | TESTS",
+    "metaDescription": "Consultant en stratégie digitale et IA à Saumur : audit, feuille de route et automatisations rentables pour votre entreprise. Contactez TESTS dès aujourd’hui."
   },
   "medias": {
     "logo": {
-      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212186/sites/christophe-guillon-conseils/christophe-guillon-conseils-logo-1793212185686.webp",
-      "alt": "Logo Christophe GUILLON CONSEILS"
+      "url": "[https://res.cloudinary.com/qupy9lhi/image/upload/v1793214165/sites/tests/tests-logo-1793214164922.webp](https://res.cloudinary.com/qupy9lhi/image/upload/v1793214165/sites/tests/tests-logo-1793214164922.webp)",
+      "alt": "Logo TESTS"
     },
     "photos": [
       {
-        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212187/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-1-1793212186653.webp",
+        "url": "[https://res.cloudinary.com/qupy9lhi/image/upload/v1793214166/sites/tests/tests-visuel-1-1793214165836.webp](https://res.cloudinary.com/qupy9lhi/image/upload/v1793214166/sites/tests/tests-visuel-1-1793214165836.webp)",
         "titre": "Présentation 1",
-        "description": "Réalisation de Christophe GUILLON CONSEILS à Saumur."
+        "description": "Réalisation de TESTS à Saumur."
       },
       {
-        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212188/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-2-1793212187802.webp",
+        "url": "[https://res.cloudinary.com/qupy9lhi/image/upload/v1793214167/sites/tests/tests-visuel-2-1793214166507.webp](https://res.cloudinary.com/qupy9lhi/image/upload/v1793214167/sites/tests/tests-visuel-2-1793214166507.webp)",
         "titre": "Présentation 2",
-        "description": "Réalisation de Christophe GUILLON CONSEILS à Saumur."
+        "description": "Réalisation de TESTS à Saumur."
       }
     ]
   },
   "engagements": [
-    "Une approche méthodique fondée sur l’analyse de votre contexte, vos objectifs et vos contraintes opérationnelles.",
-    "Des recommandations concrètes, hiérarchisées et directement actionnables par vos équipes.",
-    "Des livrables clairs pour piloter vos projets digitaux et vos cas d’usage IA.",
-    "Un accompagnement orienté résultats, avec des indicateurs de performance et de retour sur investissement définis dès le départ."
+    "Une analyse rigoureuse de vos enjeux business avant toute recommandation technologique.",
+    "Des livrables clairs, actionnables et adaptés aux ressources de votre entreprise.",
+    "Un accompagnement orienté résultats, avec des indicateurs de performance définis dès le départ.",
+    "Une expertise accessible à distance pour les entreprises du Maine-et-Loire et au-delà."
   ],
   "services": [
     {
       "titre": "Audit digital et IA",
-      "description": "Diagnostic de votre maturité digitale, de vos processus et de vos opportunités IA. Vous repartez avec une cartographie des priorités, des risques et des gains attendus.",
-      "tarif": "À partir de 1 500 €"
+      "description": "Diagnostic complet de votre présence digitale, de vos processus et de vos opportunités d’intelligence artificielle. Vous repartez avec un rapport priorisé et des recommandations concrètes.",
+      "tarif": "À partir de 1 200 €"
     },
     {
-      "titre": "Stratégie digitale et feuille de route",
-      "description": "Construction d’une stratégie alignée sur vos objectifs business : canaux, parcours clients, outils, organisation, budget et plan d’action sur 6 à 12 mois.",
+      "titre": "Stratégie digitale sur mesure",
+      "description": "Construction d’une feuille de route digitale alignée sur vos objectifs commerciaux : positionnement, canaux d’acquisition, parcours client, outils et budget prévisionnel.",
+      "tarif": "À partir de 1 800 €"
+    },
+    {
+      "titre": "Automatisation des processus avec l’IA",
+      "description": "Identification et mise en place d’automatisations pour gagner du temps sur les tâches répétitives : prospection, suivi client, reporting, gestion documentaire ou support.",
       "tarif": "À partir de 2 500 €"
     },
     {
-      "titre": "Accompagnement IA pour entreprises",
-      "description": "Identification et cadrage de cas d’usage IA à forte valeur : automatisation, productivité, relation client, analyse de données et support à la décision.",
-      "tarif": "À partir de 1 900 €"
-    },
-    {
-      "titre": "Conseil et pilotage de projets B2B",
-      "description": "Assistance à maîtrise d’ouvrage pour cadrer, sélectionner et piloter vos projets digitaux, avec des livrables, jalons et indicateurs de succès précis.",
-      "tarif": "À partir de 850 € / jour"
+      "titre": "Accompagnement mensuel en transformation digitale",
+      "description": "Un accompagnement régulier pour piloter vos projets, former vos équipes, arbitrer les priorités et mesurer le retour sur investissement de vos initiatives digitales et IA.",
+      "tarif": "À partir de 750 € / mois"
     }
   ],
   "faq": [
     {
-      "question": "Quels services propose un consultant en stratégie digitale et IA à Saumur ?",
-      "reponse": "Christophe Guillon Conseils propose des audits digitaux, la définition d’une stratégie et d’une feuille de route, l’identification de cas d’usage IA ainsi que l’accompagnement au pilotage de projets pour les entreprises B2B."
+      "question": "Proposez-vous un accompagnement en stratégie digitale et IA à Saumur ?",
+      "reponse": "Oui. TESTS accompagne les entreprises de Saumur et du Maine-et-Loire en stratégie digitale, intelligence artificielle, automatisation et transformation des processus. Les missions peuvent également être réalisées à distance."
     },
     {
-      "question": "Intervenez-vous uniquement à Saumur ?",
-      "reponse": "Le cabinet est basé à Saumur, dans le Maine-et-Loire, et intervient localement ainsi qu’à distance auprès des entreprises qui souhaitent bénéficier d’un accompagnement en stratégie digitale et IA."
+      "question": "Travaillez-vous uniquement avec des entreprises locales ?",
+      "reponse": "Non. Le cabinet est basé à Saumur et intervient principalement en Maine-et-Loire, mais propose aussi ses prestations à distance auprès de professionnels et d’entreprises partout en France."
     },
     {
-      "question": "Comment se déroule un premier accompagnement ?",
-      "reponse": "Après un échange initial pour comprendre vos enjeux, un audit permet d’analyser votre situation. Vous recevez ensuite des recommandations priorisées, un plan d’action et, si besoin, un accompagnement à la mise en œuvre."
+      "question": "L’intelligence artificielle est-elle adaptée à une petite entreprise ?",
+      "reponse": "Oui, lorsqu’elle est déployée avec méthode. L’objectif n’est pas d’ajouter un outil supplémentaire, mais d’automatiser les tâches à fort potentiel de gain de temps, d’améliorer la qualité du suivi client et de renforcer la prise de décision."
     },
     {
-      "question": "L’IA est-elle adaptée à une petite ou moyenne entreprise ?",
-      "reponse": "Oui. L’objectif est d’identifier des cas d’usage simples, utiles et rentables : automatisation de tâches répétitives, amélioration du suivi client, analyse de données ou aide à la décision, selon vos ressources et priorités."
+      "question": "Comment se déroule une première mission avec TESTS ?",
+      "reponse": "Nous commençons par un échange pour comprendre vos enjeux, puis réalisons un audit ciblé. Vous recevez ensuite des recommandations priorisées, un plan d’action et, si besoin, un accompagnement à la mise en œuvre."
     }
   ]
 }
