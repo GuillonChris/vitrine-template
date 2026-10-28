@@ -25,7 +25,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Installation des dépendances
         run: npm install
@@ -40,12 +39,11 @@ jobs:
             echo "Déploiement manuel pour : $CLIENT_FILE"
             node scripts/ci-deploy.mjs "$CLIENT_FILE"
           else
-            # Détection des fichiers modifiés dans clients/
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^clients/.*/site.json$' || true)
             
             if [ -z "$CHANGED_FILES" ]; then
-              echo "Aucun fichier site.json modifié."
-              exit 0
+              # Cas du premier commit ou push initial
+              CHANGED_FILES=$(find clients -name "site.json" || true)
             fi
 
             for FILE in $CHANGED_FILES; do
