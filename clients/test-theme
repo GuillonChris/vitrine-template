@@ -1,0 +1,111 @@
+{
+  "design": {
+    "layout": "corporate-b2b",
+    "palette": "indigo-cyan",
+    "typo": "moderne"
+  },
+  "identite": {
+    "nomCommercial": "Christophe GUILLON CONSEILS",
+    "raisonSociale": "CGC",
+    "statutJuridique": "Micro-entreprise",
+    "capitalSocial": "N/A",
+    "directeurPublication": "Christophe GUILLON",
+    "secteur": "Prestation de services aux entreprises (B2B)",
+    "metier": "Consultant en stratégie digital et IA",
+    "tagline": "Votre consultant en stratégie digitale et IA à Saumur, pour transformer vos enjeux en résultats mesurables.",
+    "description": "Consultant en stratégie digitale et IA à Saumur, j’accompagne les entreprises du Maine-et-Loire avec une méthode claire, des livrables actionnables et un ROI mesurable. Contactez-moi.",
+    "siret": "12345678900012",
+    "rcs": "Angers",
+    "tva": "Franchise en base de TVA (art. 293 B du CGI)",
+    "assurancePro": "",
+    "mediateur": ""
+  },
+  "contact": {
+    "telephone": "06 75 05 23 75",
+    "telephoneLien": "+33675052375",
+    "email": "contact@Christophe-guillon.com",
+    "adresse": "18 rue du Pressoir",
+    "codePostal": "49400",
+    "ville": "Saumur",
+    "zoneIntervention": "Maine-et-Loire, distanciel",
+    "horaires": "Du lundi au vendredi de 8h30 à 12h30 et de 14h à 17h30"
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
+  "seo": {
+    "motsCles": [
+      "consultant stratégie digitale Saumur",
+      "consultant IA Maine-et-Loire",
+      "accompagnement transformation digitale entreprise",
+      "audit IA entreprise Saumur",
+      "conseil digital B2B Saumur"
+    ],
+    "metaTitle": "Consultant Stratégie Digitale & IA à Saumur | Christophe Guillon Conseils",
+    "metaDescription": "Consultant en stratégie digitale et IA à Saumur : audit, feuille de route et accompagnement B2B pour un ROI mesurable. Contactez Christophe Guillon Conseils."
+  },
+  "medias": {
+    "logo": {
+      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212186/sites/christophe-guillon-conseils/christophe-guillon-conseils-logo-1793212185686.webp",
+      "alt": "Logo Christophe GUILLON CONSEILS"
+    },
+    "photos": [
+      {
+        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212187/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-1-1793212186653.webp",
+        "titre": "Présentation 1",
+        "description": "Réalisation de Christophe GUILLON CONSEILS à Saumur."
+      },
+      {
+        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793212188/sites/christophe-guillon-conseils/christophe-guillon-conseils-visuel-2-1793212187802.webp",
+        "titre": "Présentation 2",
+        "description": "Réalisation de Christophe GUILLON CONSEILS à Saumur."
+      }
+    ]
+  },
+  "engagements": [
+    "Une approche méthodique fondée sur l’analyse de votre contexte, vos objectifs et vos contraintes opérationnelles.",
+    "Des recommandations concrètes, hiérarchisées et directement actionnables par vos équipes.",
+    "Des livrables clairs pour piloter vos projets digitaux et vos cas d’usage IA.",
+    "Un accompagnement orienté résultats, avec des indicateurs de performance et de retour sur investissement définis dès le départ."
+  ],
+  "services": [
+    {
+      "titre": "Audit digital et IA",
+      "description": "Diagnostic de votre maturité digitale, de vos processus et de vos opportunités IA. Vous repartez avec une cartographie des priorités, des risques et des gains attendus.",
+      "tarif": "À partir de 1 500 €"
+    },
+    {
+      "titre": "Stratégie digitale et feuille de route",
+      "description": "Construction d’une stratégie alignée sur vos objectifs business : canaux, parcours clients, outils, organisation, budget et plan d’action sur 6 à 12 mois.",
+      "tarif": "À partir de 2 500 €"
+    },
+    {
+      "titre": "Accompagnement IA pour entreprises",
+      "description": "Identification et cadrage de cas d’usage IA à forte valeur : automatisation, productivité, relation client, analyse de données et support à la décision.",
+      "tarif": "À partir de 1 900 €"
+    },
+    {
+      "titre": "Conseil et pilotage de projets B2B",
+      "description": "Assistance à maîtrise d’ouvrage pour cadrer, sélectionner et piloter vos projets digitaux, avec des livrables, jalons et indicateurs de succès précis.",
+      "tarif": "À partir de 850 € / jour"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Quels services propose un consultant en stratégie digitale et IA à Saumur ?",
+      "reponse": "Christophe Guillon Conseils propose des audits digitaux, la définition d’une stratégie et d’une feuille de route, l’identification de cas d’usage IA ainsi que l’accompagnement au pilotage de projets pour les entreprises B2B."
+    },
+    {
+      "question": "Intervenez-vous uniquement à Saumur ?",
+      "reponse": "Le cabinet est basé à Saumur, dans le Maine-et-Loire, et intervient localement ainsi qu’à distance auprès des entreprises qui souhaitent bénéficier d’un accompagnement en stratégie digitale et IA."
+    },
+    {
+      "question": "Comment se déroule un premier accompagnement ?",
+      "reponse": "Après un échange initial pour comprendre vos enjeux, un audit permet d’analyser votre situation. Vous recevez ensuite des recommandations priorisées, un plan d’action et, si besoin, un accompagnement à la mise en œuvre."
+    },
+    {
+      "question": "L’IA est-elle adaptée à une petite ou moyenne entreprise ?",
+      "reponse": "Oui. L’objectif est d’identifier des cas d’usage simples, utiles et rentables : automatisation de tâches répétitives, amélioration du suivi client, analyse de données ou aide à la décision, selon vos ressources et priorités."
+    }
+  ]
+}
