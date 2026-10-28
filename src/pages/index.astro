@@ -3,17 +3,25 @@
 import site from '../data/site.json';
 
 const gaId = site.analytics?.googleAnalyticsId || '';
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : 'https://vitrine-template.pages.dev';
+
+// Détection du type de schéma Schema.org
+const isBTP = site.identite.secteur?.toLowerCase().includes('bâtiment') || site.identite.metier?.toLowerCase().includes('plombier');
+const businessType = isBTP ? 'HomeAndConstructionBusiness' : 'LocalBusiness';
 
 const schemaLocalBusiness = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Plumber",
-      "@id": "https://vitrine-template.pages.dev/#business",
+      "@type": businessType,
+      "@id": `${canonicalUrl}#business`,
+      "url": canonicalUrl,
       "name": site.identite.nomCommercial,
-      "description": site.identite.description,
+      "legalName": site.identite.raisonSociale,
+      "description": site.seo?.metaDescription || site.identite.description,
       "telephone": site.contact.telephoneLien,
       "email": site.contact.email,
+      "image": site.medias?.logo?.url || site.medias?.photos?.[0]?.url,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": site.contact.adresse,
@@ -22,11 +30,12 @@ const schemaLocalBusiness = {
         "addressCountry": "FR"
       },
       "areaServed": site.contact.zoneIntervention,
+      "openingHours": site.contact.horaires,
       "priceRange": "€€"
     },
     {
       "@type": "FAQPage",
-      "@id": "https://vitrine-template.pages.dev/#faq",
+      "@id": `${canonicalUrl}#faq`,
       "mainEntity": site.faq.map((item) => ({
         "@type": "Question",
         "name": item.question,
@@ -38,6 +47,10 @@ const schemaLocalBusiness = {
     }
   ]
 };
+
+const metaTitle = site.seo?.metaTitle || `${site.identite.nomCommercial} — ${site.identite.metier} à ${site.contact.ville}`;
+const metaDesc = site.seo?.metaDescription || site.identite.description;
+const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
 ---
 
 <!doctype html>
@@ -45,11 +58,26 @@ const schemaLocalBusiness = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{site.identite.nomCommercial} — {site.identite.metier} à {site.contact.ville}</title>
-    <meta name="description" content={site.identite.description} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDesc} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow" />
 
-    <!-- SEO Schema.org -->
+    <!-- Open Graph / Réseaux Sociaux -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDesc} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDesc} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <!-- SEO Données structurées (JSON-LD) -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaLocalBusiness)} />
 
     <style>
@@ -64,11 +92,7 @@ const schemaLocalBusiness = {
         --border: #e2e8f0;
       }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
 
       body {
         font-family: system-ui, -apple-system, sans-serif;
@@ -77,21 +101,37 @@ const schemaLocalBusiness = {
         line-height: 1.6;
       }
 
+      /* Header */
       header {
         background: var(--bg-card);
         border-bottom: 1px solid var(--border);
-        padding: 1rem 1.5rem;
+        padding: 0.85rem 1.5rem;
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 50;
       }
 
       .header-content {
-        max-width: 1000px;
+        max-width: 1050px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 1rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+      }
+
+      .brand-logo {
+        height: 42px;
+        width: auto;
+        object-fit: contain;
+        border-radius: 4px;
       }
 
       .logo-titre {
@@ -104,21 +144,27 @@ const schemaLocalBusiness = {
         background: var(--accent);
         color: #ffffff;
         text-decoration: none;
-        padding: 0.5rem 1rem;
+        padding: 0.55rem 1rem;
         border-radius: 6px;
         font-weight: 600;
         font-size: 0.9rem;
+        white-space: nowrap;
+        transition: background 0.2s;
       }
 
+      .cta-phone-nav:hover { background: var(--accent-hover); }
+
+      /* Main container */
       main {
-        max-width: 1000px;
+        max-width: 1050px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 2.5rem 1rem;
       }
 
+      /* Hero */
       .hero {
         background: var(--bg-card);
-        padding: 3rem 2rem;
+        padding: 3.5rem 2rem;
         border-radius: 12px;
         border: 1px solid var(--border);
         text-align: center;
@@ -131,65 +177,69 @@ const schemaLocalBusiness = {
         color: #475569;
         font-weight: 600;
         font-size: 0.85rem;
-        padding: 0.3rem 0.8rem;
+        padding: 0.35rem 0.85rem;
         border-radius: 9999px;
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
       }
 
       h1 {
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
         color: var(--text-dark);
         line-height: 1.2;
         margin-bottom: 1rem;
       }
 
       .tagline {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
         color: #64748b;
-        max-width: 700px;
-        margin: 0 auto 1.5rem;
+        max-width: 760px;
+        margin: 0 auto 1.75rem;
       }
 
-      .btn-urgence {
+      .btn-cta-hero {
         display: inline-block;
         background: var(--accent);
         color: #ffffff;
-        padding: 0.9rem 2rem;
+        padding: 0.95rem 2rem;
         border-radius: 8px;
         text-decoration: none;
         font-size: 1.1rem;
         font-weight: 700;
         box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.25);
-        transition: background 0.2s;
+        transition: background 0.2s, transform 0.1s;
       }
 
-      .btn-urgence:hover {
+      .btn-cta-hero:hover {
         background: var(--accent-hover);
+        transform: translateY(-1px);
       }
 
+      /* Engagements */
       .engagements {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 3rem;
       }
 
       .engagement-item {
         background: var(--bg-card);
-        padding: 1rem;
+        padding: 1.1rem;
         border-radius: 8px;
         border: 1px solid var(--border);
         text-align: center;
         font-weight: 600;
         color: var(--text-dark);
+        font-size: 0.95rem;
       }
 
       h2 {
         font-size: 1.6rem;
         color: var(--text-dark);
-        margin: 2rem 0 1rem;
+        margin: 2.5rem 0 1.25rem;
       }
 
+      /* Services */
       .grid-services {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -208,23 +258,63 @@ const schemaLocalBusiness = {
 
       .card-service h3 {
         color: var(--text-dark);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
+        font-size: 1.15rem;
       }
 
       .card-service p {
         font-size: 0.95rem;
         color: #64748b;
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
       }
 
       .tarif-service {
         font-weight: 700;
-        color: var(--text-dark);
-        font-size: 1rem;
+        color: var(--accent);
+        font-size: 1.05rem;
         border-top: 1px solid var(--border);
-        padding-top: 0.75rem;
+        padding-top: 0.85rem;
       }
 
+      /* Galerie Photos (Cloudinary) */
+      .grid-galerie {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card-photo {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-photo img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background-color: #f1f5f9;
+      }
+
+      .card-photo-body {
+        padding: 1rem 1.25rem;
+      }
+
+      .card-photo-body h3 {
+        font-size: 1rem;
+        color: var(--text-dark);
+        margin-bottom: 0.35rem;
+      }
+
+      .card-photo-body p {
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+
+      /* Zone de chalandise & Horaires */
       .zone-box {
         background: #eff6ff;
         border: 1px solid #bfdbfe;
@@ -233,10 +323,9 @@ const schemaLocalBusiness = {
         margin: 2.5rem 0;
       }
 
-      .zone-box strong {
-        color: #1e40af;
-      }
+      .zone-box strong { color: #1e40af; }
 
+      /* FAQ */
       .faq-list {
         background: var(--bg-card);
         border: 1px solid var(--border);
@@ -249,18 +338,17 @@ const schemaLocalBusiness = {
         padding: 1rem 0;
       }
 
-      details:last-child {
-        border-bottom: none;
-      }
+      details:last-child { border-bottom: none; }
 
       summary {
         font-weight: 600;
         color: var(--text-dark);
         cursor: pointer;
+        outline: none;
       }
 
       details p {
-        margin-top: 0.5rem;
+        margin-top: 0.6rem;
         font-size: 0.95rem;
         color: #64748b;
       }
@@ -271,11 +359,11 @@ const schemaLocalBusiness = {
         color: #94a3b8;
         font-size: 0.85rem;
         padding: 3rem 1rem 2rem;
-        margin-top: 3rem;
+        margin-top: 4rem;
       }
 
       .footer-content {
-        max-width: 1000px;
+        max-width: 1050px;
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -285,6 +373,7 @@ const schemaLocalBusiness = {
       footer h4 {
         color: #ffffff;
         margin-bottom: 0.8rem;
+        font-size: 0.95rem;
       }
 
       footer a {
@@ -293,12 +382,12 @@ const schemaLocalBusiness = {
       }
 
       .mentions-legales {
-        max-width: 1000px;
-        margin: 2rem auto 0;
+        max-width: 1050px;
+        margin: 2.5rem auto 0;
         padding-top: 1.5rem;
         border-top: 1px solid #334155;
         font-size: 0.75rem;
-        line-height: 1.5;
+        line-height: 1.6;
       }
 
       .btn-gestion-cookies {
@@ -312,11 +401,9 @@ const schemaLocalBusiness = {
         margin-top: 0.5rem;
       }
 
-      .btn-gestion-cookies:hover {
-        color: #ffffff;
-      }
+      .btn-gestion-cookies:hover { color: #ffffff; }
 
-      /* Bandeau Cookies RGPD */
+      /* Bandeau Cookies */
       #cookie-banner {
         position: fixed;
         bottom: 1.5rem;
@@ -333,9 +420,7 @@ const schemaLocalBusiness = {
         display: none;
       }
 
-      #cookie-banner.visible {
-        display: block;
-      }
+      #cookie-banner.visible { display: block; }
 
       .cookie-title {
         font-weight: 700;
@@ -350,10 +435,7 @@ const schemaLocalBusiness = {
         line-height: 1.4;
       }
 
-      .cookie-actions {
-        display: flex;
-        gap: 0.75rem;
-      }
+      .cookie-actions { display: flex; gap: 0.75rem; }
 
       .btn-cookie {
         flex: 1;
@@ -366,23 +448,28 @@ const schemaLocalBusiness = {
         border: 1px solid transparent;
       }
 
-      .btn-cookie-accept {
-        background: var(--primary);
-        color: #ffffff;
-      }
-
-      .btn-cookie-refuse {
-        background: #f1f5f9;
-        color: var(--text-dark);
-        border-color: var(--border);
-      }
+      .btn-cookie-accept { background: var(--primary); color: #ffffff; }
+      .btn-cookie-refuse { background: #f1f5f9; color: var(--text-dark); border-color: var(--border); }
     </style>
   </head>
   <body>
 
+    <!-- En-tête -->
     <header>
       <div class="header-content">
-        <span class="logo-titre">{site.identite.nomCommercial}</span>
+        <a href="/" class="brand">
+          {site.medias?.logo?.url ? (
+            <img 
+              src={site.medias.logo.url} 
+              alt={site.medias.logo.alt || site.identite.nomCommercial} 
+              class="brand-logo" 
+              loading="eager" 
+              decoding="async" 
+            />
+          ) : (
+            <span class="logo-titre">{site.identite.nomCommercial}</span>
+          )}
+        </a>
         <a href={`tel:${site.contact.telephoneLien}`} class="cta-phone-nav">
           📞 {site.contact.telephone}
         </a>
@@ -390,21 +477,26 @@ const schemaLocalBusiness = {
     </header>
 
     <main>
+      <!-- Hero Section -->
       <section class="hero">
         <span class="badge">{site.identite.metier} à {site.contact.ville}</span>
         <h1>{site.identite.nomCommercial}</h1>
         <p class="tagline">{site.identite.tagline}</p>
-        <a href={`tel:${site.contact.telephoneLien}`} class="btn-urgence">
-          Appeler pour un dépannage ({site.contact.telephone})
+        <a href={`tel:${site.contact.telephoneLien}`} class="btn-cta-hero">
+          {isBTP ? 'Demander une intervention ou un devis' : 'Prendre contact / RDV'} ({site.contact.telephone})
         </a>
       </section>
 
-      <section class="engagements">
-        {site.engagements.map((item) => (
-          <div class="engagement-item">✓ {item}</div>
-        ))}
-      </section>
+      <!-- Engagements & Réassurance -->
+      {site.engagements && site.engagements.length > 0 && (
+        <section class="engagements">
+          {site.engagements.map((item) => (
+            <div class="engagement-item">✓ {item}</div>
+          ))}
+        </section>
+      )}
 
+      <!-- Prestations et Tarifs -->
       <section>
         <h2>Nos prestations et tarifs</h2>
         <div class="grid-services">
@@ -420,11 +512,39 @@ const schemaLocalBusiness = {
         </div>
       </section>
 
+      <!-- Réalisations & Galerie (Photos Cloudinary) -->
+      {site.medias?.photos && site.medias.photos.length > 0 && (
+        <section>
+          <h2>Nos réalisations & savoir-faire</h2>
+          <div class="grid-galerie">
+            {site.medias.photos.map((photo) => (
+              <figure class="card-photo">
+                <img 
+                  src={photo.url} 
+                  alt={photo.titre} 
+                  loading="lazy" 
+                  decoding="async" 
+                />
+                <figcaption class="card-photo-body">
+                  <h3>{photo.titre}</h3>
+                  <p>{photo.description}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Zone d'action & Disponibilités -->
       <section class="zone-box">
-        <strong>Zone d'intervention rapide :</strong>
-        <p>Nous intervenons dans les localités suivantes : {site.contact.zoneIntervention}.</p>
+        <strong>Modalités et zone d'intervention :</strong>
+        <p>Secteur desservi : {site.contact.zoneIntervention}.</p>
+        {site.contact.horaires && (
+          <p style="margin-top: 0.35rem;">Disponibilité : {site.contact.horaires}</p>
+        )}
       </section>
 
+      <!-- Foire Aux Questions -->
       <section>
         <h2>Questions fréquentes</h2>
         <div class="faq-list">
@@ -437,28 +557,39 @@ const schemaLocalBusiness = {
         </div>
       </section>
     </main>
-<footer>
+
+    <!-- Pied de page -->
+    <footer>
       <div class="footer-content">
         <div>
           <h4>{site.identite.nomCommercial}</h4>
           <p>{site.contact.adresse}<br />{site.contact.codePostal} {site.contact.ville}</p>
-          <p>Tél : <a href={`tel:${site.contact.telephoneLien}`}>{site.contact.telephone}</a></p>
+          <p style="margin-top: 0.5rem;">Tél : <a href={`tel:${site.contact.telephoneLien}`}>{site.contact.telephone}</a></p>
           <p>Email : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
+          {site.contact.horaires && <p style="margin-top: 0.5rem;">{site.contact.horaires}</p>}
         </div>
+
         <div>
-          <h4>Garanties professionnelles</h4>
-          <p>Assurance décennale :<br />{site.identite.assuranceDecennale}</p>
-          <p style="margin-top: 0.5rem;">Devis gratuit avant travaux.</p>
+          <h4>Garanties & Engagements</h4>
+          {site.identite.assurancePro ? (
+            <p>Assurance professionnelle :<br />{site.identite.assurancePro}</p>
+          ) : (
+            <p>Devis détaillé et transparent avant toute intervention.</p>
+          )}
+          <p style="margin-top: 0.5rem;">Conseil personnalisé et travail soigné.</p>
         </div>
-        <div>
-          <h4>Médiation de la consommation</h4>
-          <p>{site.identite.mediateur}</p>
-        </div>
+
+        {site.identite.mediateur && (
+          <div>
+            <h4>Médiation de la consommation</h4>
+            <p>{site.identite.mediateur}</p>
+          </div>
+        )}
       </div>
 
       <div class="mentions-legales">
         <p>
-          <strong>{site.identite.raisonSociale}</strong> — SIRET : {site.identite.siret} — Hébergement : Cloudflare Pages.<br />
+          <strong>{site.identite.raisonSociale}</strong> — SIRET : {site.identite.siret} {site.identite.rcs ? `— Immatriculation : ${site.identite.rcs}` : ''} {site.identite.tva ? `— TVA : ${site.identite.tva}` : ''} — Hébergement : Cloudflare Pages.<br />
           <a href="/mentions-legales/">Mentions légales</a> &bull; 
           <a href="/politique-confidentialite/">Politique de confidentialité</a>
         </p>
@@ -472,7 +603,7 @@ const schemaLocalBusiness = {
     <div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
       <div id="cookie-title" class="cookie-title">Mesure d'audience & vie privée</div>
       <p class="cookie-text">
-        Ce site utilise des traceurs de mesure d'audience (Google Analytics 4) pour analyser son trafic et améliorer l'expérience utilisateur. Aucun traceur publicitaire n'est déposé sans votre consentement.
+        Ce site utilise des traceurs de mesure d'audience (Google Analytics 4) pour analyser son trafic et améliorer votre expérience de navigation. Aucun traceur publicitaire n'est déposé sans votre accord.
       </p>
       <div class="cookie-actions">
         <button id="cookie-refuse" class="btn-cookie btn-cookie-refuse" type="button">Refuser tout</button>
@@ -480,7 +611,7 @@ const schemaLocalBusiness = {
       </div>
     </div>
 
-    <!-- Script de gestion du consentement et chargement conditionnel GA4 -->
+    <!-- Script RGPD et activation GA4 -->
     <script define:vars={{ gaId }}>
       const STORAGE_KEY = 'site_cookie_consent';
       const banner = document.getElementById('cookie-banner');
@@ -489,7 +620,7 @@ const schemaLocalBusiness = {
       const btnReopen = document.getElementById('btn-reopen-cookies');
 
       function loadGoogleAnalytics(id) {
-        if (!id || id === 'G-XXXXXXXXXX') return;
+        if (!id || id.trim() === '' || id === 'G-XXXXXXXXXX') return;
         if (window.gaLoaded) return;
         window.gaLoaded = true;
 
@@ -513,7 +644,6 @@ const schemaLocalBusiness = {
         }
       }
 
-      // Vérification du consentement au chargement
       const currentConsent = localStorage.getItem(STORAGE_KEY);
       if (currentConsent === 'granted') {
         loadGoogleAnalytics(gaId);
@@ -521,7 +651,6 @@ const schemaLocalBusiness = {
         banner.classList.add('visible');
       }
 
-      // Écouteurs d'événements
       btnAccept.addEventListener('click', () => applyConsent('granted'));
       btnRefuse.addEventListener('click', () => applyConsent('denied'));
       btnReopen.addEventListener('click', () => {
