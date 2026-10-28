@@ -1,0 +1,55 @@
+name: Deploiement Client Vitrine
+
+on:
+  push:
+    paths:
+      - 'clients/**/site.json'
+  workflow_dispatch:
+    inputs:
+      client_path:
+        description: 'Chemin du fichier (ex: clients/saumur-plomberie/site.json)'
+        required: true
+        default: 'clients/'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Identifier le client modifié et déployer
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            CLIENT_FILE="${{ github.event.inputs.client_path }}"
+            echo "Déploiement manuel pour : $CLIENT_FILE"
+            node scripts/ci-deploy.mjs "$CLIENT_FILE"
+          else
+            # Détection des fichiers modifiés dans clients/
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^clients/.*/site.json$' || true)
+            
+            if [ -z "$CHANGED_FILES" ]; then
+              echo "Aucun fichier site.json modifié."
+              exit 0
+            fi
+
+            for FILE in $CHANGED_FILES; do
+              echo "Traitement de : $FILE"
+              node scripts/ci-deploy.mjs "$FILE"
+            done
+          fi
