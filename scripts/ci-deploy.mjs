@@ -34,12 +34,12 @@ console.log('⚙️ Compilation du site statique...');
 execSync('npm run build', { stdio: 'inherit' });
 
 // 4. Initialisation du projet Cloudflare s'il n'existe pas encore
-console.log(`📦 Vérification de l'existence du projet "${slugProjet}" sur Cloudflare...`);
+console.log(`📦 Initialisation du projet "${slugProjet}" sur Cloudflare...`);
 try {
   execSync(
     `npx wrangler pages project create "${slugProjet}" --production-branch="main"`,
     {
-      stdio: 'pipe',
+      stdio: 'inherit',
       env: {
         ...process.env,
         CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
@@ -47,7 +47,7 @@ try {
       }
     }
   );
-  console.log(`✓ Nouveau projet Cloudflare créé avec succès.`);
+  console.log(`✓ Projet créé sur Cloudflare.`);
 } catch {
   console.log(`✓ Le projet existe déjà sur Cloudflare.`);
 }
