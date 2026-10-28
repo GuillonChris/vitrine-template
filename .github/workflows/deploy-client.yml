@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
 
       - name: Installation des dépendances
-        run: npm ci
+        run: npm install
 
       - name: Identifier le client modifié et déployer
         env:
