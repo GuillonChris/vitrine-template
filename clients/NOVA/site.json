@@ -3,6 +3,7 @@
   "name": "Nova Conseil",
   "template": "consulting",
   "domain": "https://nova-conseil.fr",
+  "secteur": "Conseil en stratégie et organisation",
   "contact": {
     "email": "contact@nova-conseil.fr",
     "phone": "+33 1 23 45 67 89",
@@ -15,12 +16,12 @@
   },
   "seo": {
     "title": "Nova Conseil | Conseil en stratégie et performance des PME",
-    "description": "Accompagnement opérationnel et pilotage stratégique pour dirigeants de PME et indépendants.",
+    "description": "Accompagnement opérationnel et pilotage stratégique pour dirigeants de PME et indépendants à Paris.",
     "keywords": [
       "conseil en stratégie",
       "pilotage entreprise",
-      "consultant PME",
-      "Paris"
+      "consultant PME Paris",
+      "audit opérationnel"
     ]
   },
   "legal": {
