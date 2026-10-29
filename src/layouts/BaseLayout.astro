@@ -1,0 +1,77 @@
+---
+import siteData from '../data/site.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = siteData.site?.title || siteData.nom || "Site Vitrine", 
+  description = siteData.site?.description || siteData.description || "" 
+} = Astro.props;
+
+// Valeurs par défaut sécurisées si le JSON ne contient pas encore la clé theme
+const theme = siteData.theme || {};
+const palette = theme.palette || {
+  primary: "#2563EB",
+  secondary: "#F3F4F6",
+  accent: "#1D4ED8",
+  background: "#FFFFFF",
+  text: "#1F2937"
+};
+const typography = theme.typography || {
+  heading: "Inter, sans-serif",
+  body: "Inter, sans-serif"
+};
+const radius = theme.borderRadius || "0.5rem";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Injection dynamique des variables CSS du client -->
+    <style define:vars={{
+      colorPrimary: palette.primary,
+      colorSecondary: palette.secondary,
+      colorAccent: palette.accent,
+      colorBg: palette.background,
+      colorText: palette.text,
+      fontHeading: typography.heading,
+      fontBody: typography.body,
+      uiRadius: radius
+    }}>
+      :root {
+        --color-primary: var(--colorPrimary);
+        --color-secondary: var(--colorSecondary);
+        --color-accent: var(--colorAccent);
+        --color-bg: var(--colorBg);
+        --color-text: var(--colorText);
+        --font-heading: var(--fontHeading);
+        --font-body: var(--fontBody);
+        --radius: var(--uiRadius);
+      }
+
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        font-family: var(--font-body);
+        margin: 0;
+        padding: 0;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col justify-between">
+    <slot />
+  </body>
+</html>
