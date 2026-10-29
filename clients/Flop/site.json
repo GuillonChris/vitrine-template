@@ -1,0 +1,104 @@
+{
+"design": {
+"layout": "corporate-b2b",
+"palette": "bleu-marine-or",
+"typo": "moderne"
+},
+"identite": {
+"nomCommercial": "FLOP",
+"raisonSociale": "FLOP",
+"statutJuridique": "Micro-entreprise",
+"capitalSocial": "N/A",
+"directeurPublication": "Sophie MARTIN",
+"secteur": "Prestation de services aux entreprises (B2B)",
+"metier": "Agence de communication qui fait FLOP",
+"tagline": "L'agence de communication B2B qui fait décoller votre marque depuis Saumur pour rayonner dans toute la France.",
+"description": "Agence de communication B2B à Saumur. FLOP accompagne les entreprises dans toute la France avec des stratégies sur-mesure. Contactez-nous pour votre projet.",
+"siret": "12345678900012",
+"rcs": "Angers",
+"tva": "Franchise en base de TVA (art. 293 B du CGI)",
+"assurancePro": "",
+"mediateur": ""
+},
+"contact": {
+"telephone": "0241000000",
+"telephoneLien": "+33241000000",
+"email": "contact@flop.fr",
+"adresse": "14 rue de la rue",
+"codePostal": "49400",
+"ville": "Saumur",
+"zoneIntervention": "France",
+"horaires": "tous les jours sauf le dimanche de 9h à 17h"
+},
+"analytics": {
+"googleAnalyticsId": "G-XXXXXXXXXX"
+},
+"seo": {
+"motsCles": [
+"Agence de communication B2B Saumur",
+"Stratégie de communication entreprise",
+"Création identité visuelle B2B"
+],
+"metaTitle": "Agence de communication B2B à Saumur (49) & France | FLOP",
+"metaDescription": "Agence de communication B2B à Saumur. FLOP accompagne les entreprises dans toute la France avec des stratégies sur-mesure. Contactez-nous pour votre projet."
+},
+"medias": {
+"logo": {
+"url": "[https://res.cloudinary.com/qupy9lhi/image/upload/v1793288047/sites/flop/flop-logo-1793288045863.webp](https://res.cloudinary.com/qupy9lhi/image/upload/v1793288047/sites/flop/flop-logo-1793288045863.webp)",
+"alt": "Logo FLOP"
+},
+"photos": [
+{
+"url": "[https://res.cloudinary.com/qupy9lhi/image/upload/v1793288048/sites/flop/flop-visuel-2-1793288046899.webp](https://res.cloudinary.com/qupy9lhi/image/upload/v1793288048/sites/flop/flop-visuel-2-1793288046899.webp)",
+"titre": "Présentation 2",
+"description": "Réalisation de FLOP à Saumur."
+}
+]
+},
+"engagements": [
+"Expertise pointue en communication B2B avec une forte orientation ROI.",
+"Stratégies sur-mesure adaptées aux cycles de vente longs et complexes.",
+"Transparence totale des livrables et accompagnement de proximité.",
+"Réactivité et agilité d'une agence locale intervenant à l'échelle nationale."
+],
+"services": [
+{
+"titre": "Stratégie de Marque & Identité Visuelle",
+"description": "Conception de votre plateforme de marque, création de logo et charte graphique pour asseoir votre crédibilité auprès des professionnels.",
+"tarif": "À partir de 1 500 €"
+},
+{
+"titre": "Création de Site Web Corporate",
+"description": "Développement de sites vitrines B2B sur-mesure, optimisés pour la conversion, l'expérience utilisateur et le référencement naturel (SEO).",
+"tarif": "À partir de 2 500 €"
+},
+{
+"titre": "Génération de Leads & Contenu B2B",
+"description": "Rédaction d'articles d'expertise, livres blancs et cas clients pour attirer vos cibles et nourrir votre force de vente.",
+"tarif": "À partir de 800 € / mois"
+},
+{
+"titre": "Social Media & Social Selling",
+"description": "Animation de vos réseaux professionnels (LinkedIn) et accompagnement de vos dirigeants pour devenir des leaders d'opinion.",
+"tarif": "À partir de 600 € / mois"
+}
+],
+"faq": [
+{
+"question": "Votre agence de communication intervient-elle uniquement à Saumur ?",
+"reponse": "Bien que notre agence soit implantée à Saumur (49), notre méthodologie digitale nous permet d'accompagner des entreprises, prescripteurs et partenaires commerciaux partout en France avec la même exigence de proximité et de résultats."
+},
+{
+"question": "Pourquoi faire appel à une agence spécialisée en B2B ?",
+"reponse": "La communication B2B répond à des codes spécifiques : cycles d'achat plus longs, cibles multiples au sein d'une même entreprise et besoin de rassurer par l'expertise. Nous maîtrisons ces enjeux pour construire des stratégies qui génèrent un réel ROI."
+},
+{
+"question": "Quel budget prévoir pour travailler avec votre agence ?",
+"reponse": "Nos accompagnements s'adaptent à l'envergure de vos projets. Par exemple, la gestion de vos réseaux sociaux débute à partir de 600 €/mois. Nous établissons toujours un devis précis et transparent après un audit de vos besoins."
+},
+{
+"question": "Comment mesurez-vous l'efficacité de vos actions de communication ?",
+"reponse": "La performance est au cœur de notre ADN. Nous définissons ensemble des indicateurs clés (KPIs) dès le lancement : trafic qualifié, taux de conversion, nombre de leads générés, et vous fournissons des reportings réguliers pour suivre votre retour sur investissement."
+}
+]
+}
