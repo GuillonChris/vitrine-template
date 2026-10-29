@@ -1,0 +1,83 @@
+{
+  "design": {
+    "layout": "corporate-b2b",
+    "palette": "bleu-marine-or",
+    "typo": "moderne"
+  },
+  "identite": {
+    "nomCommercial": "Nova Conseil",
+    "raisonSociale": "SARL NOVA",
+    "statutJuridique": "SAS / SASU",
+    "capitalSocial": "10000 ",
+    "directeurPublication": "Christophe GUILLON",
+    "secteur": "Prestation de services aux entreprises (B2B)",
+    "metier": "Conseil en communication",
+    "tagline": "Valorisez votre savoir-faire et accélérez votre croissance B2B à Paris grâce à une communication stratégique à fort impact.",
+    "description": "Cabinet de conseil en communication basé à Paris, Nova Conseil accompagne les dirigeants, PME et grands comptes dans la structuration de leur image de marque et le déploiement de stratégies multicanales performantes. Nous allions rigueur méthodologique, clarté des livrables et recherche constante de ROI.",
+    "siret": "12345678900012",
+    "rcs": "ANGERS",
+    "tva": "Franchise en base de TVA (art. 293 B du CGI)",
+    "assurancePro": "",
+    "mediateur": ""
+  },
+  "contact": {
+    "telephone": "06 75052375",
+    "telephoneLien": "+33675052375",
+    "email": "contact@nova.fr",
+    "adresse": "14 rue de la répubique",
+    "codePostal": "75015",
+    "ville": "Paris",
+    "zoneIntervention": "France",
+    "horaires": "du lundi au vendredi de 9h à 18h"
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
+  "seo": {
+    "motsCles": [
+      "conseil en communication Paris",
+      "agence communication B2B Paris",
+      "stratégie de marque entreprise",
+      "formation communication professionnelle",
+      "accompagnement communication Paris 15"
+    ],
+    "metaTitle": "Conseil en Communication B2B à Paris | Nova Conseil",
+    "metaDescription": "Conseil en communication B2B à Paris : optimisez l'image de votre entreprise et gagnez en impact. Contactez Nova Conseil pour un plan d'action sur mesure."
+  },
+  "medias": {
+    "logo": {
+      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793263965/sites/nova-conseil/nova-conseil-logo-1793263961253.webp",
+      "alt": "Logo Nova Conseil"
+    },
+    "photos": [
+      {
+        "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793263967/sites/nova-conseil/nova-conseil-visuel-2-1793263966367.webp",
+        "titre": "Présentation 2",
+        "description": "Réalisation de Nova Conseil à Paris."
+      }
+    ]
+  },
+  "engagements": [
+    "Orientation stricte vers les résultats et la mesure concrète du retour sur investissement (ROI)",
+    "Méthodologie d'analyse rigoureuse adaptée aux enjeux spécifiques du marché B2B",
+    "Livrables stratégiques et opérationnels directement exploitables par vos équipes",
+    "Accompagnement réactif avec un interlocuteur senior dédié tout au long de la mission"
+  ],
+  "services": [
+    {
+      "titre": "Conseil en stratégie de communication B2B",
+      "description": "Audit de votre écosystème, définition du positionnement de marque, identification des messages clés et élaboration d'une feuille de route opérationnelle pour asseoir votre autorité sectorielle.",
+      "tarif": "À partir de 2 500 €"
+    },
+    {
+      "titre": "Formation & montée en compétences des équipes",
+      "description": "Programmes de formation sur mesure pour vos collaborateurs : prise de parole corporate, techniques de communication d'influence et utilisation stratégique des leviers numériques en B2B.",
+      "tarif": "À partir de 1 200 € / jour"
+    },
+    {
+      "titre": "Accompagnement opérationnel & pilotage de marque",
+      "description": "Suivi régulier et externalisation du pilotage de votre communication : production de contenus à haute valeur ajoutée, coordination des prestataires et comités de suivi mensuels.",
+      "tarif": "À partir de 1 800 € / mois"
+    }
+  ],
+  "faq":
