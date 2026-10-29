@@ -48,4 +48,54 @@
   "medias": {
     "logo": {
       "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793272851/sites/candy/candy-logo-1793272850324.webp",
-      "alt": "Logo
+      "alt": "Logo Candy"
+    },
+    "photos": []
+  },
+  "engagements": [
+    "Sélection exigeante de confiseries artisanales et saveurs d'antan authentiques",
+    "Confection soignée de sachets, bonbonnières et buffets sucrés personnalisés",
+    "Expédition rapide et hermétique dans toute la France pour une fraîcheur garantie",
+    "Conseils chaleureux et passionnés au service des petits et grands gourmands"
+  ],
+  "services": [
+    {
+      "titre": "Assortiments de Bonbons au Poids & d'Antan",
+      "description": "Composez votre mélange idéal parmi un large choix de confiseries traditionnelles, guimauves tendres, sucres d'orge et délices acidulés.",
+      "tarif": "À partir de 3,50 € les 100g"
+    },
+    {
+      "titre": "Candy Bar & Événements Sur-Mesure",
+      "description": "Scénographie sucrée clé en main pour mariages, baptêmes et réceptions privées à Saumur, incluant bonbonnières rétro et choix thématique.",
+      "tarif": "À partir de 89,00 €"
+    },
+    {
+      "titre": "Coffrets Cadeaux & Bonbonnières Découverte",
+      "description": "Paniers garnis élégants et coffrets prêts à offrir pour combler les gourmets avec les meilleures spécialités sucrées de la boutique.",
+      "tarif": "À partir de 14,90 €"
+    },
+    {
+      "titre": "Commandes Entreprises & Arbres de Noël",
+      "description": "Confection de ballotins et sachets personnalisés pour comités d'entreprise, associations et fêtes de fin d'année avec tarifs dégressifs.",
+      "tarif": "À partir de 4,50 € par sachet"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Quels types de bonbons propose votre boutique Candy à Saumur ?",
+      "reponse": "Nous proposons un vaste assortiment de confiseries : grands classiques d'antan (bergamotes, violettes, roudoudous), bonbons gélifiés, guimauves, réglisses, ainsi qu'une sélection adaptée aux régimes sans gluten ou sans gélatine animale."
+    },
+    {
+      "question": "Proposez-vous la mise en place de candy bars pour les réceptions à Saumur ?",
+      "reponse": "Oui, nous concevons des bars à bonbons et buffets sucrés sur-mesure pour vos mariages, anniversaires ou événements professionnels à Saumur et ses environs, adaptés à vos couleurs et à vos goûts."
+    },
+    {
+      "question": "Est-il possible de se faire livrer vos confiseries en dehors de Saumur ?",
+      "reponse": "Absolument. Nous expédions toutes nos créations, coffrets et sachets de bonbons partout en France dans des emballages hermétiques assurant une préservation parfaite de la texture et des arômes."
+    },
+    {
+      "question": "Comment commander et quels sont les délais de préparation ?",
+      "reponse": "Vous pouvez commander en ligne 24h/24 ou nous contacter directement par téléphone. Vos assortiments sont préparés avec soin sous 24 à 48 heures ouvrées avant expédition ou mise à disposition."
+    }
+  ]
+}
