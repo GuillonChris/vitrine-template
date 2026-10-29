@@ -1,62 +1,93 @@
 {
   "slug": "nova-conseil",
-  "name": "Nova Conseil",
-  "template": "consulting",
-  "domain": "https://nova-conseil.fr",
-  "secteur": "Conseil en stratégie et organisation",
+  "identite": {
+    "nomCommercial": "Nova Conseil",
+    "raisonSociale": "Nova Conseil SAS",
+    "metier": "Consultant en stratégie d'entreprise",
+    "secteur": "Conseil et services aux entreprises",
+    "tagline": "Accompagnement opérationnel et pilotage stratégique orienté résultats pour dirigeants de PME.",
+    "description": "Cabinet de conseil en stratégie d'entreprise et pilotage de la performance dédié aux dirigeants de PME et indépendants.",
+    "siret": "123 456 789 00012",
+    "rcs": "RCS Paris B 123 456 789",
+    "tva": "FR12123456789",
+    "assurancePro": "RC Professionnelle Hiscox n° 987654321",
+    "mediateur": "Médiateur du Conseil National des Entreprises de Conseil (CNEC)"
+  },
   "contact": {
+    "telephone": "01 23 45 67 89",
+    "telephoneLien": "+33123456789",
     "email": "contact@nova-conseil.fr",
-    "phone": "+33 1 23 45 67 89",
-    "address": {
-      "street": "12 rue de la Paix",
-      "city": "Paris",
-      "zip": "75002",
-      "country": "FR"
-    }
+    "adresse": "12 rue de la Paix",
+    "codePostal": "75002",
+    "ville": "Paris",
+    "zoneIntervention": "Paris, Île-de-France et accompagnement national à distance",
+    "horaires": "Du lundi au vendredi de 8h30 à 18h30"
   },
   "seo": {
-    "title": "Nova Conseil | Conseil en stratégie et performance des PME",
-    "description": "Accompagnement opérationnel et pilotage stratégique pour dirigeants de PME et indépendants à Paris.",
-    "keywords": [
-      "conseil en stratégie",
-      "pilotage entreprise",
-      "consultant PME Paris",
-      "audit opérationnel"
+    "metaTitle": "Nova Conseil — Conseil en stratégie et pilotage pour PME à Paris",
+    "metaDescription": "Optimisez vos opérations et accélérez votre rentabilité. Accompagnement stratégique sur mesure pour dirigeants. Diagnostic sous 15 jours."
+  },
+  "analytics": {
+    "googleAnalyticsId": ""
+  },
+  "medias": {
+    "logo": {
+      "url": "",
+      "alt": "Logo Nova Conseil"
+    },
+    "photos": [
+      {
+        "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+        "titre": "Atelier de cadrage stratégique",
+        "description": "Session d'arbitrage trimestriel avec les dirigeants et managers de pôle."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        "titre": "Pilotage des indicateurs de marge",
+        "description": "Conception de tableaux de bord financiers sur mesure pour piloter la rentabilité."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=800&q=80",
+        "titre": "Optimisation des processus opérationnels",
+        "description": "Cartographie des flux internes pour supprimer les goulots d'étranglement."
+      }
     ]
   },
-  "legal": {
-    "siret": "12345678900012",
-    "vat": "FR12123456789",
-    "publicationDirector": "Christophe Nova"
-  },
-  "sections": {
-    "hero": {
-      "headline": "Accélérez la croissance durable de votre entreprise",
-      "subheadline": "Conseil pragmatique et pilotage stratégique orienté résultats pour dirigeants exigeants.",
-      "ctaText": "Prendre rendez-vous",
-      "ctaLink": "#contact"
+  "engagements": [
+    "Diagnostic initial rendu sous 15 jours",
+    "Recommandations pragmatiques et immédiatement activables",
+    "Accompagnement personnalisé en direct avec un consultant senior",
+    "Confidentialité garantie par accord d'exclusivité et accord NDA"
+  ],
+  "services": [
+    {
+      "titre": "Diagnostic & Audit de rentabilité",
+      "description": "Analyse intégrale de vos processus métiers et de votre structure de coûts pour identifier vos leviers prioritaires.",
+      "tarif": "À partir de 1 500 € HT"
     },
-    "services": [
-      {
-        "title": "Diagnostic & Audit stratégique",
-        "description": "Analyse complète de vos opérations et identification de vos leviers de rentabilité sous 15 jours."
-      },
-      {
-        "title": "Pilotage de la performance",
-        "description": "Mise en place d'indicateurs clés et accompagnement mensuel dans vos arbitrages."
-      },
-      {
-        "title": "Transformation digitale & IA",
-        "description": "Intégration d'outils modernes pour automatiser vos tâches sans alourdir votre organisation."
-      }
-    ],
-    "about": {
-      "title": "À propos de Nova Conseil",
-      "content": "Plus de dix ans d'expérience au service de l'efficacité et de la rentabilité des PME et indépendants."
+    {
+      "titre": "Pilotage stratégique mensuel",
+      "description": "Points mensuels d'orientation, arbitrages prioritaires et tableau de bord opérationnel partagé avec le dirigeant.",
+      "tarif": "Sur devis mensuel"
     },
-    "contact": {
-      "title": "Échangeons sur votre projet",
-      "formAction": "/api/contact"
+    {
+      "titre": "Transformation digitale & Automatisation",
+      "description": "Sélection et déploiement d'outils logiciels et d'automatisation IA pour éliminer vos tâches administratives chronophages.",
+      "tarif": "Sur devis"
     }
-  }
+  ],
+  "faq": [
+    {
+      "question": "Comment se déroule le premier contact ?",
+      "reponse": "Nous échangeons 30 minutes sans engagement pour cerner vos priorités et déterminer si notre expertise est adaptée à votre contexte."
+    },
+    {
+      "question": "Intervenez-vous en dehors de l'Île-de-France ?",
+      "reponse": "Oui, nous combinons des séances de travail en visio régulière et des ateliers stratégiques sur site partout en France."
+    },
+    {
+      "question": "Quel est le délai pour démarrer une mission ?",
+      "reponse": "Une fois la proposition validée, nous planifions l'atelier de cadrage initial sous cinq jours ouvrés."
+    }
+  ]
 }
