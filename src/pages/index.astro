@@ -1,13 +1,39 @@
 ---
 // Chemin : src/pages/index.astro
-import site from '../data/site.json';
+import rawSite from '../data/site.json';
 
-const gaId = site.analytics?.googleAnalyticsId || '';
+// Sécurisation globale pour éviter tout crash si une section manque
+const site = rawSite ?? {};
+const identite = site?.identite ?? {};
+const contact = site?.contact ?? {};
+const seo = site?.seo ?? {};
+const medias = site?.medias ?? {};
+const services = Array.isArray(site?.services) ? site.services : [];
+const faq = Array.isArray(site?.faq) ? site.faq : [];
+const engagements = Array.isArray(site?.engagements) ? site.engagements : [];
+const photos = Array.isArray(medias?.photos) ? medias.photos : [];
+
+const gaId = site?.analytics?.googleAnalyticsId || '';
 const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : 'https://vitrine-template.pages.dev';
 
-// Détection du type de schéma Schema.org
-const isBTP = site.identite.secteur?.toLowerCase().includes('bâtiment') || site.identite.metier?.toLowerCase().includes('plombier');
+// Détection sécurisée du type de schéma Schema.org
+const secteurTexte = (identite?.secteur ?? '').toLowerCase();
+const metierTexte = (identite?.metier ?? '').toLowerCase();
+const isBTP = secteurTexte.includes('bâtiment') || metierTexte.includes('plombier');
 const businessType = isBTP ? 'HomeAndConstructionBusiness' : 'LocalBusiness';
+
+const nomCommercial = identite?.nomCommercial ?? 'Nova Conseil';
+const raisonSociale = identite?.raisonSociale ?? nomCommercial;
+const description = seo?.metaDescription || identite?.description || '';
+const metier = identite?.metier ?? 'Conseil en stratégie';
+const ville = contact?.ville ?? 'Paris';
+const telephone = contact?.telephone ?? '01 23 45 67 89';
+const telephoneLien = contact?.telephoneLien ?? telephone.replace(/\s+/g, '');
+const email = contact?.email ?? 'contact@nova-conseil.fr';
+
+const metaTitle = seo?.metaTitle || `${nomCommercial} — ${metier} à ${ville}`;
+const metaDesc = description;
+const ogImage = photos[0]?.url || medias?.logo?.url || '';
 
 const schemaLocalBusiness = {
   "@context": "https://schema.org",
@@ -16,41 +42,37 @@ const schemaLocalBusiness = {
       "@type": businessType,
       "@id": `${canonicalUrl}#business`,
       "url": canonicalUrl,
-      "name": site.identite.nomCommercial,
-      "legalName": site.identite.raisonSociale,
-      "description": site.seo?.metaDescription || site.identite.description,
-      "telephone": site.contact.telephoneLien,
-      "email": site.contact.email,
-      "image": site.medias?.logo?.url || site.medias?.photos?.[0]?.url,
+      "name": nomCommercial,
+      "legalName": raisonSociale,
+      "description": description,
+      "telephone": telephoneLien,
+      "email": email,
+      "image": medias?.logo?.url || photos[0]?.url,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": site.contact.adresse,
-        "addressLocality": site.contact.ville,
-        "postalCode": site.contact.codePostal,
+        "streetAddress": contact?.adresse ?? '',
+        "addressLocality": ville,
+        "postalCode": contact?.codePostal ?? '',
         "addressCountry": "FR"
       },
-      "areaServed": site.contact.zoneIntervention,
-      "openingHours": site.contact.horaires,
+      "areaServed": contact?.zoneIntervention ?? ville,
+      "openingHours": contact?.horaires ?? '',
       "priceRange": "€€"
     },
-    {
+    ...(faq.length > 0 ? [{
       "@type": "FAQPage",
       "@id": `${canonicalUrl}#faq`,
-      "mainEntity": site.faq.map((item) => ({
+      "mainEntity": faq.map((item: { question: string; reponse: string }) => ({
         "@type": "Question",
-        "name": item.question,
+        "name": item?.question ?? '',
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": item.reponse
+          "text": item?.reponse ?? ''
         }
       }))
-    }
+    }] : [])
   ]
 };
-
-const metaTitle = site.seo?.metaTitle || `${site.identite.nomCommercial} — ${site.identite.metier} à ${site.contact.ville}`;
-const metaDesc = site.seo?.metaDescription || site.identite.description;
-const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
 ---
 
 <!doctype html>
@@ -276,7 +298,7 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
         padding-top: 0.85rem;
       }
 
-      /* Galerie Photos (Cloudinary) */
+      /* Galerie Photos */
       .grid-galerie {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -314,7 +336,7 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
         color: #64748b;
       }
 
-      /* Zone de chalandise & Horaires */
+      /* Zone de chalandise */
       .zone-box {
         background: #eff6ff;
         border: 1px solid #bfdbfe;
@@ -458,20 +480,20 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
     <header>
       <div class="header-content">
         <a href="/" class="brand">
-          {site.medias?.logo?.url ? (
+          {medias?.logo?.url ? (
             <img 
-              src={site.medias.logo.url} 
-              alt={site.medias.logo.alt || site.identite.nomCommercial} 
+              src={medias.logo.url} 
+              alt={medias?.logo?.alt || nomCommercial} 
               class="brand-logo" 
               loading="eager" 
               decoding="async" 
             />
           ) : (
-            <span class="logo-titre">{site.identite.nomCommercial}</span>
+            <span class="logo-titre">{nomCommercial}</span>
           )}
         </a>
-        <a href={`tel:${site.contact.telephoneLien}`} class="cta-phone-nav">
-          📞 {site.contact.telephone}
+        <a href={`tel:${telephoneLien}`} class="cta-phone-nav">
+          📞 {telephone}
         </a>
       </div>
     </header>
@@ -479,49 +501,51 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
     <main>
       <!-- Hero Section -->
       <section class="hero">
-        <span class="badge">{site.identite.metier} à {site.contact.ville}</span>
-        <h1>{site.identite.nomCommercial}</h1>
-        <p class="tagline">{site.identite.tagline}</p>
-        <a href={`tel:${site.contact.telephoneLien}`} class="btn-cta-hero">
-          {isBTP ? 'Demander une intervention ou un devis' : 'Prendre contact / RDV'} ({site.contact.telephone})
+        <span class="badge">{metier} à {ville}</span>
+        <h1>{nomCommercial}</h1>
+        {identite?.tagline && <p class="tagline">{identite.tagline}</p>}
+        <a href={`tel:${telephoneLien}`} class="btn-cta-hero">
+          {isBTP ? 'Demander une intervention ou un devis' : 'Prendre contact / RDV'} ({telephone})
         </a>
       </section>
 
       <!-- Engagements & Réassurance -->
-      {site.engagements && site.engagements.length > 0 && (
+      {engagements.length > 0 && (
         <section class="engagements">
-          {site.engagements.map((item) => (
+          {engagements.map((item: string) => (
             <div class="engagement-item">✓ {item}</div>
           ))}
         </section>
       )}
 
       <!-- Prestations et Tarifs -->
-      <section>
-        <h2>Nos prestations et tarifs</h2>
-        <div class="grid-services">
-          {site.services.map((service) => (
-            <article class="card-service">
-              <div>
-                <h3>{service.titre}</h3>
-                <p>{service.description}</p>
-              </div>
-              <div class="tarif-service">{service.tarif}</div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {services.length > 0 && (
+        <section>
+          <h2>Nos prestations et tarifs</h2>
+          <div class="grid-services">
+            {services.map((service: { titre: string; description: string; tarif: string }) => (
+              <article class="card-service">
+                <div>
+                  <h3>{service.titre}</h3>
+                  <p>{service.description}</p>
+                </div>
+                {service.tarif && <div class="tarif-service">{service.tarif}</div>}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <!-- Réalisations & Galerie (Photos Cloudinary) -->
-      {site.medias?.photos && site.medias.photos.length > 0 && (
+      <!-- Réalisations & Galerie -->
+      {photos.length > 0 && (
         <section>
           <h2>Nos réalisations & savoir-faire</h2>
           <div class="grid-galerie">
-            {site.medias.photos.map((photo) => (
+            {photos.map((photo: { url: string; titre: string; description: string }) => (
               <figure class="card-photo">
                 <img 
                   src={photo.url} 
-                  alt={photo.titre} 
+                  alt={photo.titre || nomCommercial} 
                   loading="lazy" 
                   decoding="async" 
                 />
@@ -538,58 +562,64 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
       <!-- Zone d'action & Disponibilités -->
       <section class="zone-box">
         <strong>Modalités et zone d'intervention :</strong>
-        <p>Secteur desservi : {site.contact.zoneIntervention}.</p>
-        {site.contact.horaires && (
-          <p style="margin-top: 0.35rem;">Disponibilité : {site.contact.horaires}</p>
+        <p>Secteur desservi : {contact?.zoneIntervention || ville}.</p>
+        {contact?.horaires && (
+          <p style="margin-top: 0.35rem;">Disponibilité : {contact.horaires}</p>
         )}
       </section>
 
       <!-- Foire Aux Questions -->
-      <section>
-        <h2>Questions fréquentes</h2>
-        <div class="faq-list">
-          {site.faq.map((item) => (
-            <details>
-              <summary>{item.question}</summary>
-              <p>{item.reponse}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      {faq.length > 0 && (
+        <section>
+          <h2>Questions fréquentes</h2>
+          <div class="faq-list">
+            {faq.map((item: { question: string; reponse: string }) => (
+              <details>
+                <summary>{item.question}</summary>
+                <p>{item.reponse}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
 
     <!-- Pied de page -->
     <footer>
       <div class="footer-content">
         <div>
-          <h4>{site.identite.nomCommercial}</h4>
-          <p>{site.contact.adresse}<br />{site.contact.codePostal} {site.contact.ville}</p>
-          <p style="margin-top: 0.5rem;">Tél : <a href={`tel:${site.contact.telephoneLien}`}>{site.contact.telephone}</a></p>
-          <p>Email : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
-          {site.contact.horaires && <p style="margin-top: 0.5rem;">{site.contact.horaires}</p>}
+          <h4>{nomCommercial}</h4>
+          <p>{contact?.adresse || 'Adresse sur demande'}<br />{contact?.codePostal || ''} {ville}</p>
+          <p style="margin-top: 0.5rem;">Tél : <a href={`tel:${telephoneLien}`}>{telephone}</a></p>
+          <p>Email : <a href={`mailto:${email}`}>{email}</a></p>
+          {contact?.horaires && <p style="margin-top: 0.5rem;">{contact.horaires}</p>}
         </div>
 
         <div>
           <h4>Garanties & Engagements</h4>
-          {site.identite.assurancePro ? (
-            <p>Assurance professionnelle :<br />{site.identite.assurancePro}</p>
+          {identite?.assurancePro ? (
+            <p>Assurance professionnelle :<br />{identite.assurancePro}</p>
           ) : (
             <p>Devis détaillé et transparent avant toute intervention.</p>
           )}
           <p style="margin-top: 0.5rem;">Conseil personnalisé et travail soigné.</p>
         </div>
 
-        {site.identite.mediateur && (
+        {identite?.mediateur && (
           <div>
             <h4>Médiation de la consommation</h4>
-            <p>{site.identite.mediateur}</p>
+            <p>{identite.mediateur}</p>
           </div>
         )}
       </div>
 
       <div class="mentions-legales">
         <p>
-          <strong>{site.identite.raisonSociale}</strong> — SIRET : {site.identite.siret} {site.identite.rcs ? `— Immatriculation : ${site.identite.rcs}` : ''} {site.identite.tva ? `— TVA : ${site.identite.tva}` : ''} — Hébergement : Cloudflare Pages.<br />
+          <strong>{raisonSociale}</strong>
+          {identite?.siret ? ` — SIRET : ${identite.siret}` : ''}
+          {identite?.rcs ? ` — Immatriculation : ${identite.rcs}` : ''}
+          {identite?.tva ? ` — TVA : ${identite.tva}` : ''}
+          {' '}— Hébergement : Cloudflare Pages.<br />
           <a href="/mentions-legales/">Mentions légales</a> &bull; 
           <a href="/politique-confidentialite/">Politique de confidentialité</a>
         </p>
@@ -651,9 +681,9 @@ const ogImage = site.medias?.photos?.[0]?.url || site.medias?.logo?.url || '';
         banner.classList.add('visible');
       }
 
-      btnAccept.addEventListener('click', () => applyConsent('granted'));
-      btnRefuse.addEventListener('click', () => applyConsent('denied'));
-      btnReopen.addEventListener('click', () => {
+      btnAccept?.addEventListener('click', () => applyConsent('granted'));
+      btnRefuse?.addEventListener('click', () => applyConsent('denied'));
+      btnReopen?.addEventListener('click', () => {
         banner.classList.add('visible');
       });
     </script>
