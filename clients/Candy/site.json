@@ -1,0 +1,51 @@
+{
+  "design": {
+    "layout": "elegant",
+    "palette": "indigo-cyan",
+    "typo": "moderne"
+  },
+  "identite": {
+    "nomCommercial": "Candy",
+    "raisonSociale": "CANDY",
+    "statutJuridique": "Micro-entreprise",
+    "capitalSocial": "N/A",
+    "directeurPublication": "Johne DOE",
+    "secteur": "Commerce de proximité / Boutique / Restauration",
+    "metier": "Vente de bonbons",
+    "tagline": "Éveillez vos papilles et retrouvez vos délices d'enfance au cœur de Saumur.",
+    "description": "Candy est votre confiserie artisanale de référence à Saumur : bonbons traditionnels d'antan, créations acidulées, coffrets cadeaux gourmands et bars à bonbons sur-mesure pour tous vos événements, disponibles en boutique et en livraison partout en France.",
+    "siret": "12345678900012",
+    "rcs": "Saumur",
+    "tva": "Franchise en base de TVA (art. 293 B du CGI)",
+    "assurancePro": "",
+    "mediateur": ""
+  },
+  "contact": {
+    "telephone": "0241123456",
+    "telephoneLien": "+33241123456",
+    "email": "contact@candy.com",
+    "adresse": "14 rue du passage",
+    "codePostal": "49400",
+    "ville": "Saumur",
+    "zoneIntervention": "France",
+    "horaires": "tous les jours 24h/24"
+  },
+  "analytics": {
+    "googleAnalyticsId": "G-XXXXXXXXXX"
+  },
+  "seo": {
+    "motsCles": [
+      "confiserie Saumur",
+      "vente de bonbons Saumur",
+      "bonbons d'antan Saumur",
+      "candy bar mariage Saumur",
+      "coffret bonbons Maine-et-Loire",
+      "magasin de bonbons 49400"
+    ],
+    "metaTitle": "Candy Saumur | Vente de Bonbons, Confiserie & Douceurs d'Antan",
+    "metaDescription": "Découvrez Candy à Saumur : vente de bonbons d'antan, coffrets gourmands et créations sucrées pour tous vos événements. Commandez vos douceurs en ligne !"
+  },
+  "medias": {
+    "logo": {
+      "url": "https://res.cloudinary.com/qupy9lhi/image/upload/v1793272851/sites/candy/candy-logo-1793272850324.webp",
+      "alt": "Logo
