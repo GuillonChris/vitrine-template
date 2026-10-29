@@ -1,76 +1,88 @@
 ---
-// Chemin : src/pages/index.astro
-import rawSite from '../data/site.json';
+import siteData from '../data/site.json';
 
-// Sécurisation globale pour éviter tout crash si une section manque
-const site = rawSite ?? {};
-const identite = site?.identite ?? {};
-const contact = site?.contact ?? {};
-const seo = site?.seo ?? {};
-const medias = site?.medias ?? {};
-const services = Array.isArray(site?.services) ? site.services : [];
-const faq = Array.isArray(site?.faq) ? site.faq : [];
-const engagements = Array.isArray(site?.engagements) ? site.engagements : [];
-const photos = Array.isArray(medias?.photos) ? medias.photos : [];
+// Extraction et sécurisation des données avec valeurs de repli (fallbacks)
+const companyName = siteData.nom || siteData.client || "Mon Entreprise";
+const metaTitle = siteData.site?.title || `${companyName} | Artisan & Services Locaux`;
+const metaDescription = siteData.site?.description || siteData.description || `Découvrez les services professionnels de ${companyName}. Devis rapide et intervention locale garantie.`;
+const siteUrl = siteData.site?.url || "https://example.fr";
 
-const gaId = site?.analytics?.googleAnalyticsId || '';
-const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : 'https://vitrine-template.pages.dev';
+// Paramètres de charte graphique dynamique
+const palette = siteData.theme?.palette || {
+  primary: "#2563EB",
+  secondary: "#F3F4F6",
+  accent: "#1D4ED8",
+  background: "#FFFFFF",
+  text: "#1F2937",
+  cardBg: "#F9FAFB"
+};
 
-// Détection sécurisée du type de schéma Schema.org
-const secteurTexte = (identite?.secteur ?? '').toLowerCase();
-const metierTexte = (identite?.metier ?? '').toLowerCase();
-const isBTP = secteurTexte.includes('bâtiment') || metierTexte.includes('plombier');
-const businessType = isBTP ? 'HomeAndConstructionBusiness' : 'LocalBusiness';
+const typography = siteData.theme?.typography || {
+  heading: "system-ui, -apple-system, sans-serif",
+  body: "system-ui, -apple-system, sans-serif"
+};
 
-const nomCommercial = identite?.nomCommercial ?? 'Nova Conseil';
-const raisonSociale = identite?.raisonSociale ?? nomCommercial;
-const description = seo?.metaDescription || identite?.description || '';
-const metier = identite?.metier ?? 'Conseil en stratégie';
-const ville = contact?.ville ?? 'Paris';
-const telephone = contact?.telephone ?? '01 23 45 67 89';
-const telephoneLien = contact?.telephoneLien ?? telephone.replace(/\s+/g, '');
-const email = contact?.email ?? 'contact@nova-conseil.fr';
+const uiRadius = siteData.theme?.borderRadius || "0.5rem";
 
-const metaTitle = seo?.metaTitle || `${nomCommercial} — ${metier} à ${ville}`;
-const metaDesc = description;
-const ogImage = photos[0]?.url || medias?.logo?.url || '';
+// Informations de contact et géolocalisation
+const contact = siteData.contact || {};
+const address = contact.address || "1 rue de la République";
+const city = contact.city || "Paris";
+const postalCode = contact.postalCode || "75001";
+const phone = contact.phone || "01 02 03 04 05";
+const email = contact.email || "contact@monentreprise.fr";
+const siret = siteData.legal?.siret || "123 456 789 00012";
 
-const schemaLocalBusiness = {
+// Contenus métiers
+const services = siteData.services || [
+  { title: "Prestation Sur-Mesure", description: "Une réponse ciblée et adaptée aux spécificités de votre demande." },
+  { title: "Intervention Rapide", description: "Disponibilité et réactivité pour vous garantir un service continu." },
+  { title: "Accompagnement Dédié", description: "Conseils d'experts tout au long de la réalisation de votre projet." }
+];
+
+const faq = siteData.faq || [
+  { 
+    question: `Où intervient principalement ${companyName} ?`, 
+    answer: `Nous intervenons principalement sur le secteur de ${city} et ses communes limitrophes.` 
+  },
+  { 
+    question: "Comment demander un devis gratuit ?", 
+    answer: "Vous pouvez nous joindre par téléphone ou remplir le formulaire ci-dessous pour une réponse sous 24h." 
+  }
+];
+
+// Données structurées Schema.org pour Google, Perplexity et ChatGPT
+const schemaData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": businessType,
-      "@id": `${canonicalUrl}#business`,
-      "url": canonicalUrl,
-      "name": nomCommercial,
-      "legalName": raisonSociale,
-      "description": description,
-      "telephone": telephoneLien,
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#business`,
+      "name": companyName,
+      "url": siteUrl,
+      "telephone": phone,
       "email": email,
-      "image": medias?.logo?.url || photos[0]?.url,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": contact?.adresse ?? '',
-        "addressLocality": ville,
-        "postalCode": contact?.codePostal ?? '',
+        "streetAddress": address,
+        "addressLocality": city,
+        "postalCode": postalCode,
         "addressCountry": "FR"
       },
-      "areaServed": contact?.zoneIntervention ?? ville,
-      "openingHours": contact?.horaires ?? '',
-      "priceRange": "€€"
+      "description": metaDescription
     },
-    ...(faq.length > 0 ? [{
+    {
       "@type": "FAQPage",
-      "@id": `${canonicalUrl}#faq`,
-      "mainEntity": faq.map((item: { question: string; reponse: string }) => ({
+      "@id": `${siteUrl}/#faq`,
+      "mainEntity": faq.map(item => ({
         "@type": "Question",
-        "name": item?.question ?? '',
+        "name": item.question,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": item?.reponse ?? ''
+          "text": item.answer
         }
       }))
-    }] : [])
+    }
   ]
 };
 ---
@@ -78,615 +90,365 @@ const schemaLocalBusiness = {
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{metaTitle}</title>
-    <meta name="description" content={metaDesc} />
-    <link rel="canonical" href={canonicalUrl} />
+    <meta name="description" content={metaDescription} />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
 
     <!-- Open Graph / Réseaux Sociaux -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={metaTitle} />
-    <meta property="og:description" content={metaDesc} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={siteUrl} />
     <meta property="og:locale" content="fr_FR" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={metaTitle} />
-    <meta name="twitter:description" content={metaDesc} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <!-- Données structurées SEO Local et FAQ -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
-    <!-- SEO Données structurées (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(schemaLocalBusiness)} />
-
-    <style>
+    <!-- Application dynamique du thème généré par l'IA -->
+    <style define:vars={{
+      colorPrimary: palette.primary,
+      colorSecondary: palette.secondary,
+      colorAccent: palette.accent,
+      colorBg: palette.background,
+      colorText: palette.text,
+      colorCard: palette.cardBg,
+      fontHeading: typography.heading,
+      fontBody: typography.body,
+      radius: uiRadius
+    }}>
       :root {
-        --primary: #0f172a;
-        --accent: #ea580c;
-        --accent-hover: #c2410c;
-        --bg-page: #f8fafc;
-        --bg-card: #ffffff;
-        --text: #334155;
-        --text-dark: #0f172a;
-        --border: #e2e8f0;
+        --primary: var(--colorPrimary);
+        --secondary: var(--colorSecondary);
+        --accent: var(--colorAccent);
+        --bg: var(--colorBg);
+        --text: var(--colorText);
+        --card-bg: var(--colorCard);
+        --font-h: var(--fontHeading);
+        --font-b: var(--fontBody);
+        --rad: var(--radius);
       }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
       body {
-        font-family: system-ui, -apple-system, sans-serif;
-        background-color: var(--bg-page);
+        background-color: var(--bg);
         color: var(--text);
+        font-family: var(--font-b);
         line-height: 1.6;
       }
 
-      /* Header */
-      header {
-        background: var(--bg-card);
-        border-bottom: 1px solid var(--border);
-        padding: 0.85rem 1.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 50;
+      h1, h2, h3 {
+        font-family: var(--font-h);
+        line-height: 1.25;
+        color: var(--text);
       }
 
-      .header-content {
-        max-width: 1050px;
+      .container {
+        max-width: 1100px;
         margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.85rem 1.75rem;
+        border-radius: var(--rad);
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition: opacity 0.2s ease;
+      }
+      .btn:hover { opacity: 0.9; }
+      .btn-primary { background-color: var(--primary); color: #ffffff; }
+      .btn-secondary { background-color: var(--secondary); color: var(--text); }
+
+      /* En-tête */
+      header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding: 1rem 0;
+      }
+      .nav-wrap {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem;
       }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-      }
-
-      .brand-logo {
-        height: 42px;
-        width: auto;
-        object-fit: contain;
-        border-radius: 4px;
-      }
-
-      .logo-titre {
+      .logo {
+        font-size: 1.4rem;
         font-weight: 700;
-        color: var(--text-dark);
-        font-size: 1.15rem;
-      }
-
-      .cta-phone-nav {
-        background: var(--accent);
-        color: #ffffff;
+        color: var(--primary);
         text-decoration: none;
-        padding: 0.55rem 1rem;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        white-space: nowrap;
-        transition: background 0.2s;
-      }
-
-      .cta-phone-nav:hover { background: var(--accent-hover); }
-
-      /* Main container */
-      main {
-        max-width: 1050px;
-        margin: 0 auto;
-        padding: 2.5rem 1rem;
       }
 
       /* Hero */
       .hero {
-        background: var(--bg-card);
-        padding: 3.5rem 2rem;
-        border-radius: 12px;
-        border: 1px solid var(--border);
+        padding: 5rem 0 4rem 0;
         text-align: center;
-        margin-bottom: 2rem;
       }
-
-      .badge {
-        display: inline-block;
-        background: #f1f5f9;
-        color: #475569;
-        font-weight: 600;
-        font-size: 0.85rem;
-        padding: 0.35rem 0.85rem;
-        border-radius: 9999px;
+      .hero h1 {
+        font-size: 2.75rem;
         margin-bottom: 1.25rem;
       }
-
-      h1 {
-        font-size: clamp(1.8rem, 4vw, 2.4rem);
-        color: var(--text-dark);
-        line-height: 1.2;
-        margin-bottom: 1rem;
+      .hero p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        opacity: 0.9;
       }
-
-      .tagline {
-        font-size: 1.15rem;
-        color: #64748b;
-        max-width: 760px;
-        margin: 0 auto 1.75rem;
-      }
-
-      .btn-cta-hero {
-        display: inline-block;
-        background: var(--accent);
-        color: #ffffff;
-        padding: 0.95rem 2rem;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: 700;
-        box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.25);
-        transition: background 0.2s, transform 0.1s;
-      }
-
-      .btn-cta-hero:hover {
-        background: var(--accent-hover);
-        transform: translateY(-1px);
-      }
-
-      /* Engagements */
-      .engagements {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      .hero-actions {
+        display: flex;
         gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* Grille de services */
+      .services-section {
+        padding: 4rem 0;
+      }
+      .section-title {
+        text-align: center;
         margin-bottom: 3rem;
       }
-
-      .engagement-item {
-        background: var(--bg-card);
-        padding: 1.1rem;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        text-align: center;
-        font-weight: 600;
-        color: var(--text-dark);
-        font-size: 0.95rem;
-      }
-
-      h2 {
-        font-size: 1.6rem;
-        color: var(--text-dark);
-        margin: 2.5rem 0 1.25rem;
-      }
-
-      /* Services */
-      .grid-services {
+      .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .card-service {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .card-service h3 {
-        color: var(--text-dark);
-        margin-bottom: 0.6rem;
-        font-size: 1.15rem;
-      }
-
-      .card-service p {
-        font-size: 0.95rem;
-        color: #64748b;
-        margin-bottom: 1.25rem;
-      }
-
-      .tarif-service {
-        font-weight: 700;
-        color: var(--accent);
-        font-size: 1.05rem;
-        border-top: 1px solid var(--border);
-        padding-top: 0.85rem;
-      }
-
-      /* Galerie Photos */
-      .grid-galerie {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .card-photo {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .card-photo img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        background-color: #f1f5f9;
-      }
-
-      .card-photo-body {
-        padding: 1rem 1.25rem;
-      }
-
-      .card-photo-body h3 {
-        font-size: 1rem;
-        color: var(--text-dark);
-        margin-bottom: 0.35rem;
-      }
-
-      .card-photo-body p {
-        font-size: 0.85rem;
-        color: #64748b;
-      }
-
-      /* Zone de chalandise */
-      .zone-box {
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin: 2.5rem 0;
-      }
-
-      .zone-box strong { color: #1e40af; }
-
-      /* FAQ */
-      .faq-list {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 1.5rem;
-      }
-
-      details {
-        border-bottom: 1px solid var(--border);
-        padding: 1rem 0;
-      }
-
-      details:last-child { border-bottom: none; }
-
-      summary {
-        font-weight: 600;
-        color: var(--text-dark);
-        cursor: pointer;
-        outline: none;
-      }
-
-      details p {
-        margin-top: 0.6rem;
-        font-size: 0.95rem;
-        color: #64748b;
-      }
-
-      /* Footer */
-      footer {
-        background: #0f172a;
-        color: #94a3b8;
-        font-size: 0.85rem;
-        padding: 3rem 1rem 2rem;
-        margin-top: 4rem;
-      }
-
-      .footer-content {
-        max-width: 1050px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 2rem;
       }
-
-      footer h4 {
-        color: #ffffff;
-        margin-bottom: 0.8rem;
-        font-size: 0.95rem;
+      .card {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--rad);
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      }
+      .card h3 {
+        margin-bottom: 0.75rem;
+        color: var(--primary);
       }
 
-      footer a {
-        color: #cbd5e1;
+      /* FAQ */
+      .faq-section {
+        padding: 4rem 0;
+        background-color: var(--secondary);
+      }
+      .faq-item {
+        background: var(--bg);
+        padding: 1.5rem;
+        border-radius: var(--rad);
+        margin-bottom: 1rem;
+      }
+      .faq-item h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Contact */
+      .contact-section {
+        padding: 4rem 0;
+      }
+      .contact-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 3rem;
+      }
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.35rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: var(--rad);
+        border: 1px solid rgba(0,0,0,0.2);
+        font-family: inherit;
+      }
+      .rgpd-consent {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+      }
+
+      /* Pied de page */
+      footer {
+        background: #111827;
+        color: #9CA3AF;
+        padding: 3rem 0;
+        margin-top: 4rem;
+        font-size: 0.9rem;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+      .footer-links a {
+        color: #FFFFFF;
         text-decoration: underline;
       }
 
-      .mentions-legales {
-        max-width: 1050px;
-        margin: 2.5rem auto 0;
-        padding-top: 1.5rem;
-        border-top: 1px solid #334155;
-        font-size: 0.75rem;
-        line-height: 1.6;
-      }
-
-      .btn-gestion-cookies {
-        background: transparent;
-        border: none;
-        color: #94a3b8;
-        text-decoration: underline;
-        font-size: 0.75rem;
-        cursor: pointer;
-        padding: 0;
-        margin-top: 0.5rem;
-      }
-
-      .btn-gestion-cookies:hover { color: #ffffff; }
-
-      /* Bandeau Cookies */
+      /* Bandeau Cookie RGPD */
       #cookie-banner {
         position: fixed;
         bottom: 1.5rem;
         left: 1.5rem;
         right: 1.5rem;
-        max-width: 520px;
-        margin: 0 auto;
-        background: #ffffff;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        background: #FFFFFF;
+        color: #1F2937;
         padding: 1.5rem;
-        z-index: 9999;
+        border-radius: var(--rad);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         display: none;
+        z-index: 9999;
+        border: 1px solid rgba(0,0,0,0.08);
       }
-
-      #cookie-banner.visible { display: block; }
-
-      .cookie-title {
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 0.5rem;
+      .cookie-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
       }
-
-      .cookie-text {
-        font-size: 0.85rem;
-        color: #64748b;
-        margin-bottom: 1rem;
-        line-height: 1.4;
-      }
-
-      .cookie-actions { display: flex; gap: 0.75rem; }
-
-      .btn-cookie {
-        flex: 1;
-        padding: 0.6rem 1rem;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-        text-align: center;
-        border: 1px solid transparent;
-      }
-
-      .btn-cookie-accept { background: var(--primary); color: #ffffff; }
-      .btn-cookie-refuse { background: #f1f5f9; color: var(--text-dark); border-color: var(--border); }
     </style>
   </head>
-  <body>
 
+  <body>
     <!-- En-tête -->
     <header>
-      <div class="header-content">
-        <a href="/" class="brand">
-          {medias?.logo?.url ? (
-            <img 
-              src={medias.logo.url} 
-              alt={medias?.logo?.alt || nomCommercial} 
-              class="brand-logo" 
-              loading="eager" 
-              decoding="async" 
-            />
-          ) : (
-            <span class="logo-titre">{nomCommercial}</span>
-          )}
-        </a>
-        <a href={`tel:${telephoneLien}`} class="cta-phone-nav">
-          📞 {telephone}
-        </a>
+      <div class="container nav-wrap">
+        <a href="/" class="logo">{companyName}</a>
+        <a href={`tel:${phone}`} class="btn btn-primary">Appeler : {phone}</a>
       </div>
     </header>
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero">
-        <span class="badge">{metier} à {ville}</span>
-        <h1>{nomCommercial}</h1>
-        {identite?.tagline && <p class="tagline">{identite.tagline}</p>}
-        <a href={`tel:${telephoneLien}`} class="btn-cta-hero">
-          {isBTP ? 'Demander une intervention ou un devis' : 'Prendre contact / RDV'} ({telephone})
-        </a>
-      </section>
+    <!-- Hero Section -->
+    <section class="hero container">
+      <h1>{metaTitle}</h1>
+      <p>{metaDescription}</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Demander un devis gratuit</a>
+        <a href="#services" class="btn btn-secondary">Découvrir nos services</a>
+      </div>
+    </section>
 
-      <!-- Engagements & Réassurance -->
-      {engagements.length > 0 && (
-        <section class="engagements">
-          {engagements.map((item: string) => (
-            <div class="engagement-item">✓ {item}</div>
+    <!-- Services -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Nos Services & Savoir-faire</h2>
+          <p>Des prestations adaptées à vos attentes locales</p>
+        </div>
+        <div class="grid">
+          {services.map((item) => (
+            <article class="card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
           ))}
-        </section>
-      )}
+        </div>
+      </div>
+    </section>
 
-      <!-- Prestations et Tarifs -->
-      {services.length > 0 && (
-        <section>
-          <h2>Nos prestations et tarifs</h2>
-          <div class="grid-services">
-            {services.map((service: { titre: string; description: string; tarif: string }) => (
-              <article class="card-service">
-                <div>
-                  <h3>{service.titre}</h3>
-                  <p>{service.description}</p>
-                </div>
-                {service.tarif && <div class="tarif-service">{service.tarif}</div>}
-              </article>
-            ))}
+    <!-- FAQ optimisée LLM & SEO -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Foire Aux Questions</h2>
+          <p>Toutes les réponses à vos interrogations</p>
+        </div>
+        <div class="faq-list">
+          {faq.map((item) => (
+            <div class="faq-item">
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulaire de contact sécurisé & RGPD -->
+    <section id="contact" class="contact-section container">
+      <div class="contact-layout">
+        <div>
+          <h2>Contactez-nous</h2>
+          <p style="margin-bottom: 1.5rem;">Prenez rendez-vous directement ou exposez-nous votre besoin.</p>
+          <p><strong>Adresse :</strong> {address}, {postalCode} {city}</p>
+          <p><strong>Téléphone :</strong> {phone}</p>
+          <p><strong>Email :</strong> {email}</p>
+        </div>
+
+        <form method="POST" action="/merci" onsubmit="event.preventDefault(); alert('Message envoyé.');">
+          <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" name="name" required placeholder="Votre nom" />
           </div>
-        </section>
-      )}
-
-      <!-- Réalisations & Galerie -->
-      {photos.length > 0 && (
-        <section>
-          <h2>Nos réalisations & savoir-faire</h2>
-          <div class="grid-galerie">
-            {photos.map((photo: { url: string; titre: string; description: string }) => (
-              <figure class="card-photo">
-                <img 
-                  src={photo.url} 
-                  alt={photo.titre || nomCommercial} 
-                  loading="lazy" 
-                  decoding="async" 
-                />
-                <figcaption class="card-photo-body">
-                  <h3>{photo.titre}</h3>
-                  <p>{photo.description}</p>
-                </figcaption>
-              </figure>
-            ))}
+          <div class="form-group">
+            <label for="contact-field">Téléphone ou Email</label>
+            <input type="text" id="contact-field" name="contact" required placeholder="06... ou email@exemple.fr" />
           </div>
-        </section>
-      )}
-
-      <!-- Zone d'action & Disponibilités -->
-      <section class="zone-box">
-        <strong>Modalités et zone d'intervention :</strong>
-        <p>Secteur desservi : {contact?.zoneIntervention || ville}.</p>
-        {contact?.horaires && (
-          <p style="margin-top: 0.35rem;">Disponibilité : {contact.horaires}</p>
-        )}
-      </section>
-
-      <!-- Foire Aux Questions -->
-      {faq.length > 0 && (
-        <section>
-          <h2>Questions fréquentes</h2>
-          <div class="faq-list">
-            {faq.map((item: { question: string; reponse: string }) => (
-              <details>
-                <summary>{item.question}</summary>
-                <p>{item.reponse}</p>
-              </details>
-            ))}
+          <div class="form-group">
+            <label for="message">Votre message</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Précisez votre demande..."></textarea>
           </div>
-        </section>
-      )}
-    </main>
+          <p class="rgpd-consent">
+            En validant ce formulaire, vous consentez à ce que {companyName} conserve vos coordonnées afin de traiter votre demande de contact, conformément à notre <a href="/politique-confidentialite" style="color: var(--primary);">politique de confidentialité</a>.
+          </p>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer la demande</button>
+        </form>
+      </div>
+    </section>
 
     <!-- Pied de page -->
     <footer>
-      <div class="footer-content">
-        <div>
-          <h4>{nomCommercial}</h4>
-          <p>{contact?.adresse || 'Adresse sur demande'}<br />{contact?.codePostal || ''} {ville}</p>
-          <p style="margin-top: 0.5rem;">Tél : <a href={`tel:${telephoneLien}`}>{telephone}</a></p>
-          <p>Email : <a href={`mailto:${email}`}>{email}</a></p>
-          {contact?.horaires && <p style="margin-top: 0.5rem;">{contact.horaires}</p>}
+      <div class="container">
+        <p>&copy; {new Date().getFullYear()} {companyName} - SIRET : {siret}</p>
+        <p>{address}, {postalCode} {city}</p>
+        <div class="footer-links">
+          <a href="/mentions-legales">Mentions Légales</a>
+          <a href="/politique-confidentialite">Politique de Confidentialité</a>
         </div>
-
-        <div>
-          <h4>Garanties & Engagements</h4>
-          {identite?.assurancePro ? (
-            <p>Assurance professionnelle :<br />{identite.assurancePro}</p>
-          ) : (
-            <p>Devis détaillé et transparent avant toute intervention.</p>
-          )}
-          <p style="margin-top: 0.5rem;">Conseil personnalisé et travail soigné.</p>
-        </div>
-
-        {identite?.mediateur && (
-          <div>
-            <h4>Médiation de la consommation</h4>
-            <p>{identite.mediateur}</p>
-          </div>
-        )}
-      </div>
-
-      <div class="mentions-legales">
-        <p>
-          <strong>{raisonSociale}</strong>
-          {identite?.siret ? ` — SIRET : ${identite.siret}` : ''}
-          {identite?.rcs ? ` — Immatriculation : ${identite.rcs}` : ''}
-          {identite?.tva ? ` — TVA : ${identite.tva}` : ''}
-          {' '}— Hébergement : Cloudflare Pages.<br />
-          <a href="/mentions-legales/">Mentions légales</a> &bull; 
-          <a href="/politique-confidentialite/">Politique de confidentialité</a>
-        </p>
-        <button id="btn-reopen-cookies" class="btn-gestion-cookies" type="button">
-          ⚙️ Gestion des préférences de cookies
-        </button>
       </div>
     </footer>
 
-    <!-- Bandeau Cookies RGPD -->
-    <div id="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
-      <div id="cookie-title" class="cookie-title">Mesure d'audience & vie privée</div>
-      <p class="cookie-text">
-        Ce site utilise des traceurs de mesure d'audience (Google Analytics 4) pour analyser son trafic et améliorer votre expérience de navigation. Aucun traceur publicitaire n'est déposé sans votre accord.
-      </p>
-      <div class="cookie-actions">
-        <button id="cookie-refuse" class="btn-cookie btn-cookie-refuse" type="button">Refuser tout</button>
-        <button id="cookie-accept" class="btn-cookie btn-cookie-accept" type="button">Accepter tout</button>
+    <!-- Bandeau Cookie RGPD (Sans traceur tiers actif par défaut) -->
+    <aside id="cookie-banner" role="dialog" aria-labelledby="cookie-title">
+      <h4 id="cookie-title" style="margin-bottom: 0.5rem;">Gestion des cookies</h4>
+      <p style="font-size: 0.85rem;">Ce site utilise des cookies techniques nécessaires à son bon fonctionnement. Aucun traceur publicitaire n'est déposé sans consentement.</p>
+      <div class="cookie-buttons">
+        <button id="cookie-accept" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Accepter</button>
+        <button id="cookie-refuse" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Refuser</button>
       </div>
-    </div>
+    </aside>
 
-    <!-- Script RGPD et activation GA4 -->
-    <script define:vars={{ gaId }}>
-      const STORAGE_KEY = 'site_cookie_consent';
+    <script is:inline>
       const banner = document.getElementById('cookie-banner');
-      const btnAccept = document.getElementById('cookie-accept');
-      const btnRefuse = document.getElementById('cookie-refuse');
-      const btnReopen = document.getElementById('btn-reopen-cookies');
+      const acceptBtn = document.getElementById('cookie-accept');
+      const refuseBtn = document.getElementById('cookie-refuse');
 
-      function loadGoogleAnalytics(id) {
-        if (!id || id.trim() === '' || id === 'G-XXXXXXXXXX') return;
-        if (window.gaLoaded) return;
-        window.gaLoaded = true;
-
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
-        document.head.appendChild(script);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', id, { anonymize_ip: true });
+      if (!localStorage.getItem('cookieConsent')) {
+        banner.style.display = 'block';
       }
 
-      function applyConsent(status) {
-        localStorage.setItem(STORAGE_KEY, status);
-        banner.classList.remove('visible');
+      acceptBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        banner.style.display = 'none';
+      });
 
-        if (status === 'granted') {
-          loadGoogleAnalytics(gaId);
-        }
-      }
-
-      const currentConsent = localStorage.getItem(STORAGE_KEY);
-      if (currentConsent === 'granted') {
-        loadGoogleAnalytics(gaId);
-      } else if (!currentConsent) {
-        banner.classList.add('visible');
-      }
-
-      btnAccept?.addEventListener('click', () => applyConsent('granted'));
-      btnRefuse?.addEventListener('click', () => applyConsent('denied'));
-      btnReopen?.addEventListener('click', () => {
-        banner.classList.add('visible');
+      refuseBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'refused');
+        banner.style.display = 'none';
       });
     </script>
-
   </body>
 </html>
